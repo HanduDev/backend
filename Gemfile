@@ -24,6 +24,7 @@ gem 'sqlite3', '>= 2.1'
 gem 'thruster', require: false
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
+gem 'google-id-token'
 gem 'rails-i18n'
 gem 'rswag-api'
 gem 'rswag-ui'

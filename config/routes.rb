@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         namespace :authentication do
           resources :login, only: :create
           resources :register, only: :create
+          resources :google, only: :create
         end
 
         resources :translate_text, only: :create

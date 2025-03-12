@@ -4,6 +4,55 @@ info:
   title: Handu API
   version: v1
 paths:
+  "/api/v1/authentication/google":
+    post:
+      summary: Authenticate by google
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: Logged successfully
+          content:
+            application/json:
+              example:
+                id: 1
+                email: user1@email.com
+                fullName: Félix da Mata
+                photoUrl:
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDE4ODEzMTN9.9fkFhSBG2Zsa7hWat38eTeumZD24UUrAJfhXX3bZxQY
+        '201':
+          description: Created and logged successfully
+          content:
+            application/json:
+              example:
+                id: 1
+                email: marcel@bradtke.example
+                fullName: Maria Júlia da Cunha
+                photoUrl: http://tremblay.test/candace_hamill
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDE4ODEzMTN9.9fkFhSBG2Zsa7hWat38eTeumZD24UUrAJfhXX3bZxQY
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                message: Usuário ou senha inválidos.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                      example: V5TEIVzkeRI3i9Z
+                  required:
+                  - token
+              required:
+              - user
   "/api/v1/authentication/login":
     post:
       summary: Authenticate an user
@@ -23,9 +72,10 @@ paths:
             application/json:
               example:
                 id: 1
-                email: user1@email.com
-                fullName: João Victor Monteiro
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDE3MTMzMDJ9.4LgCyPnzaDIE9auT2THdbhnICwj9VMcMyNBZbXfJHGk
+                email: user2@email.com
+                fullName: Adriana Figueira Jr.
+                photoUrl:
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDE4ODEzMTN9.9fkFhSBG2Zsa7hWat38eTeumZD24UUrAJfhXX3bZxQY
       requestBody:
         content:
           application/json:
@@ -37,8 +87,10 @@ paths:
                   properties:
                     email:
                       type: string
+                      example: shea_armstrong@cremin-stehr.example
                     password:
                       type: string
+                      example: pc9hKg4liC9o5d
               required:
               - email
               - password
@@ -73,9 +125,10 @@ paths:
             application/json:
               example:
                 id: 2
-                email: benito_white@ryan.test
-                fullName: Francisco Castanheira Neto
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDE3MTMzMDJ9.6-nzUsTsL9PbOrnt9Sl3V3ci9C29A9xKLO9iXYcJUk8
+                email: landon@bogisich-boehm.test
+                fullName: Dr. Ana Cecília Braga
+                photoUrl:
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDE4ODEzMTN9.wlQ1RyTHvwfD2DVBi6j1Bx7_WkWxB964SqiAzo1xIxM
       requestBody:
         content:
           application/json:
@@ -87,10 +140,13 @@ paths:
                   properties:
                     email:
                       type: string
+                      example: jody@littel-vandervort.example
                     password:
                       type: string
+                      example: wAG9GQ0uLX
                     full_name:
                       type: string
+                      example: Arthur Vimaranes
               required:
               - email
               - password

@@ -15,9 +15,9 @@ RSpec.describe '/api/v1/authentication/register', type: :request, swagger_doc: '
           user: {
             type: :object,
             properties: {
-              email: { type: :string },
-              password: { type: :string },
-              full_name: { type: :string }
+              email: { type: :string, example: Faker::Internet.email },
+              password: { type: :string, example: Faker::Internet.password },
+              full_name: { type: :string, example: Faker::Name.name }
             }
           }
         },

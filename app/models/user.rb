@@ -7,7 +7,9 @@
 #  id              :integer          not null, primary key
 #  full_name       :string           not null
 #  email           :string           not null
-#  password_digest :string           not null
+#  password_digest :string
+#  google_id       :string
+#  photo_url       :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -21,7 +23,7 @@ class User < ApplicationRecord
 
   validates :full_name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true
+  validates :password, presence: true, if: -> { google_id.blank? }
 
   validate :validate_password_strength
 

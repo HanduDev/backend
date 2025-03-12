@@ -16,6 +16,13 @@ RSpec.describe 'Routes', type: :routing do
                                                                     format: :json)
       end
     end
+
+    describe 'google' do
+      it 'routes to api/v1/authentication/google#create' do
+        expect(post: '/api/v1/authentication/google').to route_to('api/v1/authentication/google#create',
+                                                                  format: :json)
+      end
+    end
   end
 
   describe 'text' do
