@@ -4,14 +4,17 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  full_name       :string           not null
-#  email           :string           not null
-#  password_digest :string
-#  google_id       :string
-#  photo_url       :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                         :integer          not null, primary key
+#  full_name                  :string           not null
+#  email                      :string           not null
+#  password_digest            :string
+#  google_id                  :string
+#  photo_url                  :string
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  confirm_email_code         :string
+#  confirm_email_code_sent_at :datetime
+#  confirmed_email_at         :datetime
 #
 # Indexes
 #
@@ -85,6 +88,36 @@ RSpec.describe User, type: :model do
       let(:user) { create(:user) }
 
       it { expect(user.authenticate('invalid_password')).to eq(false) }
+    end
+  end
+
+  context 'email confirmation' do
+    context 'is valid with valid confirmation code' do
+      let(:user) do
+        create(:user, confirm_email_code: '1234', confirm_email_code_sent_at: Time.current,
+                      confirmed_email_at: nil)
+      end
+
+      it { expect(user.email_confirmed?).to eq(false) }
+      it { expect(user.email_confirmation_code_valid?(code: user.confirm_email_code)).to eq(true) }
+    end
+
+    context 'is not valid with invalid confirmation code' do
+      let(:user) do
+        create(:user, confirm_email_code: '1234', confirm_email_code_sent_at: Time.current,
+                      confirmed_email_at: nil)
+      end
+
+      it { expect(user.email_confirmation_code_valid?(code: 'invalid_code')).to eq(false) }
+    end
+
+    context 'is not valid with expired confirmation code' do
+      let(:user) do
+        create(:user, confirm_email_code: '1234', confirm_email_code_sent_at: 5.days.ago,
+                      confirmed_email_at: nil)
+      end
+
+      it { expect(user.email_confirmation_code_valid?(code: '1234')).to eq(false) }
     end
   end
 end

@@ -1,2 +1,7 @@
 pt-BR:
   password: "Senha"
+  modules/users/messages:
+    email_confirmation_sent: "E-mail de confirmação enviado com sucesso"
+  modules/users/errors:
+    email_already_confirmed: "E-mail já confirmado"
+    invalid_confirmation_code: "Código de confirmação inválido"

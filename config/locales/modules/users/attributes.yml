@@ -1,4 +1,10 @@
 pt-BR:
+  modules/users/email_confirm_mailer:
+    confirm_email:
+      subject: "Confirme seu e-mail"
+    email_already_confirmed:
+      subject: "E-mail já confirmado"
+      body: "Seu e-mail já foi confirmado. Você pode continuar usando o app."
   activerecord:
     attributes:
       user:
@@ -11,6 +17,10 @@ pt-BR:
         birthdate: "Data de Nascimento"
 
 en:
+  modules/users/email_confirm_mailer:
+    confirm_email:
+      subject: "Confirm your email"
+
   activerecord:
     attributes:
       user:

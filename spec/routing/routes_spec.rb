@@ -36,4 +36,14 @@ RSpec.describe 'Routes', type: :routing do
       expect(get: '/api/v1/languages').to route_to('api/v1/languages#index', format: :json)
     end
   end
+
+  describe 'users' do
+    it 'routes to api/v1/users#confirm_email' do
+      expect(post: '/api/v1/users/confirm_email').to route_to('api/v1/users/confirm_email#create', format: :json)
+    end
+
+    it 'routes to api/v1/users#resend_email_confirmation' do
+      expect(post: '/api/v1/users/resend_email_confirmation').to route_to('api/v1/users/resend_email_confirmation#create', format: :json)
+    end
+  end
 end

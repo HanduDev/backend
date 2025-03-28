@@ -2,7 +2,8 @@
 
 class ApplicationController < ActionController::API
   before_action :authenticate_request
-  before_action :set_paper_trail_whodunnit
+  before_action :validate_email_confirmation, if: -> { @current_user.present? }
+  before_action :set_paper_trail_whodunnit, if: -> { @current_user.present? }
 
   def authenticate_request
     header = request.headers['Authorization']
@@ -22,8 +23,15 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def validate_email_confirmation
+    return if @current_user.confirmed_email_at.present?
+
+    render json: { message: I18n.t('errors/messages.email_not_confirmed') },
+           status: :unauthorized
+  end
+
   def set_paper_trail_whodunnit
-    PaperTrail.request.whodunnit = @current_user.id if @current_user.present?
+    PaperTrail.request.whodunnit = @current_user.id
   end
 
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity

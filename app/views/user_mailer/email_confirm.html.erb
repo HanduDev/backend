@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    body {
+      line-height: 1.6;
+      color: #333;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    .container {
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #6b46c1;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .code-container {
+      background: linear-gradient(135deg, #6b46c1, #805ad5);
+      padding: 25px;
+      margin: 25px 0;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(107, 70, 193, 0.2);
+    }
+    .code {
+      font-size: 64px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 2px;
+      font-family: 'Poppins', sans-serif;
+    }
+    p {
+      color: #4a5568;
+      margin: 15px 0;
+      font-size: 16px;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #718096;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Handu - Confirme seu e-mail</h1>
+
+    <p>
+      Você recebeu um código de confirmação para confirmar seu e-mail.
+    </p>
+
+    <div class="code-container">
+      <h2 class="code">
+        <%= @user.confirm_email_code %>
+      </h2>
+    </div>
+
+    <p>
+      Se você não solicitou este código, por favor, ignore este e-mail.
+    </p>
+
+    <div class="footer">
+      Este é um e-mail automático, por favor não responda.
+    </div>
+  </div>
+</body>
+</html>

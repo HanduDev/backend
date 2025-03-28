@@ -4,14 +4,17 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  full_name       :string           not null
-#  email           :string           not null
-#  password_digest :string
-#  google_id       :string
-#  photo_url       :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                         :integer          not null, primary key
+#  full_name                  :string           not null
+#  email                      :string           not null
+#  password_digest            :string
+#  google_id                  :string
+#  photo_url                  :string
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  confirm_email_code         :string
+#  confirm_email_code_sent_at :datetime
+#  confirmed_email_at         :datetime
 #
 # Indexes
 #
@@ -23,7 +26,7 @@ class User < ApplicationRecord
 
   validates :full_name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, if: -> { google_id.blank? }
+  validates :password_digest, presence: true, if: -> { google_id.blank? }
 
   validate :validate_password_strength
 
@@ -32,6 +35,24 @@ class User < ApplicationRecord
   before_save :validate_password_strength, if: -> { self.password_digest_changed? }
 
   has_many :ai_responses, dependent: :destroy
+
+  def email_confirmed?
+    confirmed_email_at.present?
+  end
+
+  def email_confirmation_code_valid?(code:)
+    confirm_email_code.present? &&
+      confirm_email_code_sent_at.present? &&
+      confirm_email_code_sent_at > 1.hour.ago &&
+      confirm_email_code == code
+  end
+
+  def send_email_confirmation
+    self.confirm_email_code = SecureRandom.alphanumeric(4).upcase
+    self.confirm_email_code_sent_at = Time.current
+    save!
+    UserMailer.email_confirm(self).deliver_later
+  end
 
   private
 

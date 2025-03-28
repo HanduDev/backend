@@ -18,19 +18,21 @@ paths:
               example:
                 id: 1
                 email: user1@email.com
-                fullName: Félix da Mata
+                fullName: Erick Tavares
                 photoUrl:
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDE4ODEzMTN9.9fkFhSBG2Zsa7hWat38eTeumZD24UUrAJfhXX3bZxQY
+                isEmailConfirmed: true
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDMyODk4Nzh9.YXC_Ktw9RzXGFp52xP9wLLaQL41k0S_lntiQNAiyAF8
         '201':
           description: Created and logged successfully
           content:
             application/json:
               example:
                 id: 1
-                email: marcel@bradtke.example
-                fullName: Maria Júlia da Cunha
-                photoUrl: http://tremblay.test/candace_hamill
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDE4ODEzMTN9.9fkFhSBG2Zsa7hWat38eTeumZD24UUrAJfhXX3bZxQY
+                email: jaclyn.barrows@brekke-kuphal.example
+                fullName: Maria Júlia Freitas
+                photoUrl: http://kulas.example/diego
+                isEmailConfirmed: true
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDMyODk4Nzh9.YXC_Ktw9RzXGFp52xP9wLLaQL41k0S_lntiQNAiyAF8
         '401':
           description: Unauthorized
           content:
@@ -48,7 +50,7 @@ paths:
                   properties:
                     token:
                       type: string
-                      example: V5TEIVzkeRI3i9Z
+                      example: E8v9azIrcCjLg7Yp
                   required:
                   - token
               required:
@@ -73,9 +75,10 @@ paths:
               example:
                 id: 1
                 email: user2@email.com
-                fullName: Adriana Figueira Jr.
+                fullName: Theo Mendanha
                 photoUrl:
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDE4ODEzMTN9.9fkFhSBG2Zsa7hWat38eTeumZD24UUrAJfhXX3bZxQY
+                isEmailConfirmed: true
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDMyODk4Nzh9.YXC_Ktw9RzXGFp52xP9wLLaQL41k0S_lntiQNAiyAF8
       requestBody:
         content:
           application/json:
@@ -87,10 +90,10 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: shea_armstrong@cremin-stehr.example
+                      example: shaun@kohler.test
                     password:
                       type: string
-                      example: pc9hKg4liC9o5d
+                      example: ipDKqh22CK26z
               required:
               - email
               - password
@@ -125,10 +128,11 @@ paths:
             application/json:
               example:
                 id: 2
-                email: landon@bogisich-boehm.test
-                fullName: Dr. Ana Cecília Braga
+                email: clifford@hintz-schowalter.example
+                fullName: Srta. Melissa Raia
                 photoUrl:
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDE4ODEzMTN9.wlQ1RyTHvwfD2DVBi6j1Bx7_WkWxB964SqiAzo1xIxM
+                isEmailConfirmed: false
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDMyODk4Nzh9.zzGavtIC-EWrJlTbPDKE1s7hAeIAA_o0J9VYYjcnV8c
       requestBody:
         content:
           application/json:
@@ -140,13 +144,13 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: jody@littel-vandervort.example
+                      example: stephane.klocko@runolfsdottir.test
                     password:
                       type: string
-                      example: wAG9GQ0uLX
+                      example: g10nXSgwRzVg
                     full_name:
                       type: string
-                      example: Arthur Vimaranes
+                      example: Sra. Júlia Rodrigues
               required:
               - email
               - password
@@ -315,6 +319,63 @@ paths:
                   - to_language
               required:
               - translate
+  "/api/v1/users/confirm_email":
+    post:
+      summary: Confirm email
+      tags:
+      - Users
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Email confirmed successfully
+          content:
+            application/json:
+              example:
+                id: 1
+                email: user9@email.com
+                fullName: Luiza Lopes
+                photoUrl:
+                isEmailConfirmed: true
+        '422':
+          description: Invalid params
+          content:
+            application/json:
+              example:
+                message: 'param is missing or the value is empty or invalid: user'
+        '401':
+          description: Expired or invalid session
+          content:
+            application/json:
+              example:
+                message: Sessão expirada ou inválida.
+        '409':
+          description: Email already confirmed
+          content:
+            application/json:
+              example:
+                message: Email já confirmado
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      example: '1234'
+                  required:
+                  - code
+              required:
+              - user
 servers:
 - url: http://localhost:8080
   variables:

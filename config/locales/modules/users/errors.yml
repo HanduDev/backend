@@ -7,6 +7,8 @@ pt-BR:
     cellphone_taken: "já está em uso"
     invalid_credentials: "Credenciais inválidas"
     user_already_exists: "Usuário já existente"
+    email_already_confirmed: "Email já confirmado"
+    invalid_confirmation_code: "Código de confirmação inválido"
 
 en:
   modules/users/errors/messages:
@@ -14,3 +16,5 @@ en:
     error_creating: "Error creating user"
     invalid_credentials: "Invalid credentials"
     user_already_exists: "User already exists"
+    email_already_confirmed: "Email already confirmed"
+    invalid_confirmation_code: "Invalid confirmation code"

@@ -4,5 +4,6 @@
   id: user.id,
   email: user.email,
   fullName: user.full_name,
-  photoUrl: user.photo_url
+  photoUrl: user.photo_url,
+  isEmailConfirmed: user.confirmed_email_at.present?
 }.tap { |hash| hash[:token] = @token if @token.present? }

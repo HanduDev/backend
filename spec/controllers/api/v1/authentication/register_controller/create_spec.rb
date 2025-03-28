@@ -9,6 +9,10 @@ RSpec.describe Api::V1::Authentication::RegisterController, :unit, type: :contro
 
   it { expect(described_class).to be < ApplicationController }
 
+  before do
+    allow(UserMailer).to receive(:email_confirm).and_return(double(deliver_later: nil))
+  end
+
   describe 'POST #create' do
     context 'when the user exists' do
       let!(:user) { create(:user) }
@@ -32,6 +36,7 @@ RSpec.describe Api::V1::Authentication::RegisterController, :unit, type: :contro
     context 'when create user' do
       context 'with valid password' do
         let(:user) { build(:user) }
+
         let(:params) do
           {
             password: user.password,
@@ -45,6 +50,12 @@ RSpec.describe Api::V1::Authentication::RegisterController, :unit, type: :contro
 
           expect(response).to have_http_status(:created)
           expect(JSON.parse(response.body, symbolize_names: true)).to include(:token)
+        end
+
+        it 'sends email confirmation' do
+          send_request
+
+          expect(UserMailer).to have_received(:email_confirm)
         end
       end
 

@@ -15,6 +15,8 @@ class Api::V1::Authentication::RegisterController < ApplicationController
 
     @token = JwtService.encode(user_id: @user.id)
 
+    @user.send_email_confirmation
+
     render :create, status: :created
   end
 

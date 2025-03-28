@@ -20,7 +20,8 @@ class Api::V1::Authentication::GoogleController < ApplicationController
         google_id: google_auth_data['sub'],
         full_name: "#{google_auth_data['given_name']} #{google_auth_data['family_name']}",
         password: "Secure_Random_#{SecureRandom.hex(10)}",
-        photo_url: google_auth_data['picture']
+        photo_url: google_auth_data['picture'],
+        confirmed_email_at: Time.current
       )
     end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_09_153025) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_28_123740) do
   create_table "ai_responses", force: :cascade do |t|
     t.text "user_prompt", null: false
     t.text "system_prompt"
@@ -31,6 +31,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_09_153025) do
     t.string "photo_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "confirm_email_code"
+    t.datetime "confirm_email_code_sent_at"
+    t.datetime "confirmed_email_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

@@ -11,6 +11,11 @@ Rails.application.routes.draw do
           resources :google, only: :create
         end
 
+        namespace :users do
+          resources :confirm_email, only: :create
+          resources :resend_email_confirmation, only: :create
+        end
+
         resources :translate_text, only: :create
         resources :languages, only: :index
       end
