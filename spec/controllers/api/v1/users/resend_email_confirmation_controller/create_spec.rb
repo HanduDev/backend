@@ -30,5 +30,15 @@ RSpec.describe Api::V1::Users::ResendEmailConfirmationController, :unit, type: :
 
       expect(UserMailer).to have_received(:email_confirm).with(user)
     end
+
+    context 'when user already confirmed email' do
+      let(:confirmed_email_at) { Time.current }
+
+      it 'returns conflict status' do
+        send_request
+
+        expect(response).to have_http_status(:conflict)
+      end
+    end
   end
 end

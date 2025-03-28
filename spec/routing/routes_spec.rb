@@ -45,5 +45,9 @@ RSpec.describe 'Routes', type: :routing do
     it 'routes to api/v1/users#resend_email_confirmation' do
       expect(post: '/api/v1/users/resend_email_confirmation').to route_to('api/v1/users/resend_email_confirmation#create', format: :json)
     end
+
+    it 'routes to api/v1/users#me' do
+      expect(get: '/api/v1/users/me').to route_to('api/v1/users/me#show', format: :json)
+    end
   end
 end
