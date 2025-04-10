@@ -24,7 +24,6 @@
 
 class Trail < ApplicationRecord
   belongs_to :user
-  has_many :lessons, dependent: :destroy
 
   validates :name, presence: true
   validates :language, presence: true

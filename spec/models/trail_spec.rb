@@ -38,6 +38,7 @@ RSpec.describe Trail, type: :model do
     it { is_expected.to validate_presence_of(:language) }
     it { is_expected.to validate_presence_of(:description) }
     it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:user) }
     it { is_expected.to have_many(:lessons) }
     it { is_expected.to validate_inclusion_of(:language).in_array(Language::POSSIBLE_LANGUAGES) }
   end
