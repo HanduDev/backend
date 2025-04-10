@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+{
+  trails: render(partial: 'parse_trail', collection: @trails, as: :trail)
+}

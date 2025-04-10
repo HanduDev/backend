@@ -35,6 +35,7 @@ class User < ApplicationRecord
   before_save :validate_password_strength, if: -> { self.password_digest_changed? }
 
   has_many :ai_responses, dependent: :destroy
+  has_many :trails, dependent: :destroy
 
   def email_confirmed?
     confirmed_email_at.present?

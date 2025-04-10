@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
         resources :translate_text, only: :create
         resources :languages, only: :index
+        resources :trails, only: [:index, :show, :destroy]
       end
     end
 

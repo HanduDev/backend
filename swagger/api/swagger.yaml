@@ -18,21 +18,21 @@ paths:
               example:
                 id: 1
                 email: user1@email.com
-                fullName: Marina Rêgo
+                fullName: Nicolas Leiria
                 photoUrl:
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDMyOTA0NDJ9.eRo8Z6xUBND4Cu_PDYkKarO98GhZ3yGVHmQJo8Zm-u4
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzMzAxMDF9.Zg_fbrW_Wj_V-Q3iJsKFZ2NdftD0ZQXcY6H9DreUuwc
         '201':
           description: Created and logged successfully
           content:
             application/json:
               example:
                 id: 1
-                email: bill@miller-prosacco.test
-                fullName: Maria Sophia Oliveira
-                photoUrl: http://lesch.test/clare_howell
+                email: javier@raynor.example
+                fullName: Ana Júlia Barreira
+                photoUrl: http://cremin.example/austin
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDMyOTA0NDJ9.eRo8Z6xUBND4Cu_PDYkKarO98GhZ3yGVHmQJo8Zm-u4
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzMzAxMDF9.Zg_fbrW_Wj_V-Q3iJsKFZ2NdftD0ZQXcY6H9DreUuwc
         '401':
           description: Unauthorized
           content:
@@ -50,7 +50,7 @@ paths:
                   properties:
                     token:
                       type: string
-                      example: 326Y4sTmiC
+                      example: BRzYquA93ofWO48
                   required:
                   - token
               required:
@@ -75,10 +75,10 @@ paths:
               example:
                 id: 1
                 email: user2@email.com
-                fullName: Augusto Franco
+                fullName: Sr. Bruno Crespo
                 photoUrl:
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDMyOTA0NDJ9.eRo8Z6xUBND4Cu_PDYkKarO98GhZ3yGVHmQJo8Zm-u4
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzMzAxMDF9.Zg_fbrW_Wj_V-Q3iJsKFZ2NdftD0ZQXcY6H9DreUuwc
       requestBody:
         content:
           application/json:
@@ -90,10 +90,10 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: elvin.marks@kuhn.example
+                      example: diamond_kovacek@leuschke-paucek.test
                     password:
                       type: string
-                      example: 5yCyxIZr
+                      example: ztyNAWXUCv1qu
               required:
               - email
               - password
@@ -128,11 +128,11 @@ paths:
             application/json:
               example:
                 id: 2
-                email: porter.stamm@ziemann-lockman.example
-                fullName: Sra. Júlia Bernardes
+                email: edward@gutmann.test
+                fullName: Dra. Joana Silva
                 photoUrl:
                 isEmailConfirmed: false
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDMyOTA0NDJ9.RYLBGeSiTnyKueMs9YzR6ILdhGazvDp1YBltaGtn5M0
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDQzMzAxMDF9.teTPgRzHvQ3mGoGtyd-lOeeiM6DP252H25DDw7w0YQQ
       requestBody:
         content:
           application/json:
@@ -144,13 +144,13 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: beau@wiza-larkin.example
+                      example: karyl.fahey@cummings.example
                     password:
                       type: string
-                      example: mn6rQucuL0
+                      example: xjXM8pBd8i7
                     full_name:
                       type: string
-                      example: Sra. Rafaela Farias
+                      example: Davi Luiz Lessa
               required:
               - email
               - password
@@ -236,6 +236,124 @@ paths:
                   name: Centro Universitário da Fundação de Ensino Octávio Bastos
                   acronym: UNIFEOB
                   url: https://www.unifeob.edu.br
+  "/api/v1/trails/{id}":
+    delete:
+      summary: Deletes a trails
+      tags:
+      - Trails
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ID of the trail to delete
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Deleted successfully
+        '401':
+          description: Expired or invalid session
+          content:
+            application/json:
+              example:
+                message: Sessão expirada ou inválida.
+        '404':
+          description: Trail not found
+          content:
+            application/json:
+              example:
+                message: Trilha não encontrada
+    get:
+      summary: Show a trail
+      tags:
+      - Trails
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ID of the trail to delete
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Returned successfully
+          content:
+            application/json:
+              example:
+                trail:
+                  id: 1
+                  name: Veniam accusamus rerum.
+                  description: Quos est officia. Porro nisi quisquam.
+                  language:
+                    name: Inglês
+                    code: en
+        '401':
+          description: Expired or invalid session
+          content:
+            application/json:
+              example:
+                message: Sessão expirada ou inválida.
+        '404':
+          description: Trail not found
+          content:
+            application/json:
+              example:
+                message: Trilha não encontrada
+  "/api/v1/trails":
+    get:
+      summary: Returns a list of trails
+      tags:
+      - Trails
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returned successfully
+          content:
+            application/json:
+              example:
+                trails:
+                - id: 1
+                  name: Magni qui veniam.
+                  description: Cum deserunt at. Odit porro ipsum.
+                  language:
+                    name: Inglês
+                    code: en
+                - id: 2
+                  name: Est soluta qui.
+                  description: Quia est velit. Vel dignissimos unde.
+                  language:
+                    name: Inglês
+                    code: en
+                - id: 3
+                  name: Quasi enim nulla.
+                  description: Accusamus sit et. Deserunt sunt saepe.
+                  language:
+                    name: Inglês
+                    code: en
+        '401':
+          description: Expired or invalid session
+          content:
+            application/json:
+              example:
+                message: Sessão expirada ou inválida.
   "/api/v1/translate_text":
     post:
       summary: Translate an text to another language
@@ -338,8 +456,8 @@ paths:
             application/json:
               example:
                 id: 1
-                email: user9@email.com
-                fullName: Lívia Leiria
+                email: user17@email.com
+                fullName: Maria Sophia Moniz
                 photoUrl:
                 isEmailConfirmed: true
         '401':
@@ -395,8 +513,8 @@ paths:
             application/json:
               example:
                 id: 1
-                email: user12@email.com
-                fullName: Raul Teixeira
+                email: user20@email.com
+                fullName: Lorraine Leiria
                 photoUrl:
                 isEmailConfirmed: false
         '401':
@@ -437,7 +555,7 @@ paths:
               example:
                 message: Email já confirmado
 servers:
-- url: http://localhost:8080
+- url: http://localhost:3000
   variables:
     defaultHost:
-      default: http://localhost:8080
+      default: http://localhost:3000

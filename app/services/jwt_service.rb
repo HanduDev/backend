@@ -6,8 +6,9 @@ module JwtService
   SECRET_KEY = 'secret_key'
 
   def encode(payload, exp = 24.hours.from_now)
-    payload[:exp] = exp.to_i
-    JWT.encode(payload, SECRET_KEY)
+    dup_payload = payload.dup
+    dup_payload[:exp] = exp.to_i
+    JWT.encode(dup_payload, SECRET_KEY)
   end
 
   def decode(token)

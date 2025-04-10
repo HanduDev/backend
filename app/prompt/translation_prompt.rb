@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ATTRIBUTES = {}.freeze
+
 class TranslationPrompt
   include ActiveModel::Model
   include ActiveModel::Attributes
@@ -10,7 +12,7 @@ class TranslationPrompt
   validates :from_language, presence: true
   validates :to_language, presence: true
 
-  def initialize(attributes = {})
+  def initialize(attributes = ATTRIBUTES)
     super
     validate_languages
   end

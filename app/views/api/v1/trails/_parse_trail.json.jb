@@ -1,0 +1,11 @@
+# frozen_string_literal
+
+{
+  id: trail.id,
+  name: trail.name,
+  description: trail.description,
+  language: {
+    name: I18n.t("languages.#{trail.language}"),
+    code: trail.language
+  }
+}
