@@ -15,7 +15,11 @@ class Api::V1::TrailsController < ApplicationController
     raise(CustomException, prompt.errors.full_messages.to_sentence) unless prompt.errors.empty?
 
     ai_service = GoogleAiService.new(user: @current_user)
-    ai_response = JSON.parse(ai_service.generate_text(prompt: prompt.prompt))
+    ai_response = ai_service.generate_text(prompt: prompt.prompt)
+                            .gsub("```json", "")
+                            .gsub("```", "")
+
+    ai_response = JSON.parse(ai_response)
 
     @trail = @current_user.trails.create!(
       ai_response.merge(language: trail_params[:language])
@@ -23,7 +27,7 @@ class Api::V1::TrailsController < ApplicationController
 
     render :show, status: :created
   rescue JSON::ParserError
-    render json: { message: I18n.t('errors/messages.ai_response_invalid') }, status: :bad_request
+    render json: { message: I18n.t('errors/messages.ai_response_invalid') }, status: :internal_server_error
   end
 
   def show; end

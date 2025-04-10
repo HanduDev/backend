@@ -91,7 +91,7 @@ RSpec.describe Api::V1::TrailsController, :unit, type: :controller do
         }
       end
 
-      it { is_expected.to have_http_status(:bad_request) }
+      it { is_expected.to have_http_status(:internal_server_error) }
 
       it 'returns error message' do
         send_request

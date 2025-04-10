@@ -58,7 +58,9 @@ Retorne a resposta em formato JSON, seguindo o seguinte exemplo:
 {
   \"name\": \"Nome da trilha\",
   \"description\": \"Descrição da trilha\"
-}")
+}
+
+Os dados devem todos ser respondidos em português (BR).")
     end
   end
 
