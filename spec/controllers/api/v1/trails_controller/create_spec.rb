@@ -45,12 +45,24 @@ RSpec.describe Api::V1::TrailsController, :unit, type: :controller do
 
     context 'when language is valid' do
       before do
-        ai_response = {
+        ai_trail_response = {
           name: Faker::Lorem.sentence,
           description: Faker::Lorem.paragraph
         }.to_json
 
-        allow_any_instance_of(GoogleAiService).to receive(:generate_text).and_return(ai_response)
+        ai_lessons_response = [
+          {
+            name: Faker::Lorem.sentence,
+            markdown_content: Faker::Lorem.paragraph
+          },
+          {
+            name: Faker::Lorem.sentence,
+            markdown_content: Faker::Lorem.paragraph
+          }
+        ].to_json
+
+        allow_any_instance_of(GoogleAiService).to receive(:generate_text)
+          .and_return(ai_trail_response, ai_lessons_response)
       end
 
       let(:expected_response) do
@@ -62,7 +74,8 @@ RSpec.describe Api::V1::TrailsController, :unit, type: :controller do
             language: {
               name: 'Português',
               code: trail.language
-            }
+            },
+            progress: trail.progress
           }
         }
       end
@@ -77,6 +90,14 @@ RSpec.describe Api::V1::TrailsController, :unit, type: :controller do
         trail.reload
 
         expect(json_response).to eq(expected_response)
+      end
+
+      it 'creates a trail' do
+        expect { send_request }.to change(Trail, :count).by(1)
+      end
+
+      it 'creates lessons' do
+        expect { send_request }.to change(Lesson, :count).by(2)
       end
     end
 

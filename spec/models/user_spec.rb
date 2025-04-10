@@ -38,6 +38,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to have_many(:ai_responses) }
     it { is_expected.to have_many(:trails) }
+    it { is_expected.to have_many(:lessons).through(:trails) }
 
     context 'is not valid duplicated user' do
       let(:email) { Faker::Internet.email }

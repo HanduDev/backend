@@ -68,4 +68,18 @@ RSpec.describe 'Routes', type: :routing do
       expect(delete: '/api/v1/trails/1').to route_to('api/v1/trails#destroy', id: '1', format: :json)
     end
   end
+
+  describe 'lessons' do
+    it 'routes to api/v1/lessons#index' do
+      expect(get: '/api/v1/lessons').to route_to('api/v1/lessons#index', format: :json)
+    end
+
+    it 'routes to api/v1/lessons#show' do
+      expect(get: '/api/v1/lessons/1').to route_to('api/v1/lessons#show', id: '1', format: :json)
+    end
+
+    it 'routes to api/v1/lessons#destroy' do
+      expect(delete: '/api/v1/lessons/1').to route_to('api/v1/lessons#destroy', id: '1', format: :json)
+    end
+  end
 end

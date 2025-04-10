@@ -9,5 +9,6 @@ language = Language.new(acronym: trail.language)
   language: {
     name: language.name,
     code: language.acronym
-  }
+  },
+  progress: trail.progress
 }

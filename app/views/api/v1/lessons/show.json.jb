@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+lesson = @lesson
+
+{
+  lesson: {
+    id: lesson.id,
+    name: lesson.name,
+    content: lesson.markdown_content,
+    hasFinished: lesson.has_finished,
+    createdAt: lesson.created_at
+  }
+}

@@ -35,6 +35,8 @@ RSpec.describe Api::V1::TrailsController, :unit, type: :controller do
     end
 
     context 'when trail is found' do
+      before { create_list(:lesson, 2, trail: trail) }
+
       let!(:trail) { create(:trail, user: user, language: 'pt') }
       let(:id) { trail.id }
 
@@ -47,7 +49,14 @@ RSpec.describe Api::V1::TrailsController, :unit, type: :controller do
             language: {
               name: 'Português',
               code: trail.language
-            }
+            },
+            progress: trail.progress,
+            lessons: trail.lessons.map do |lesson|
+              {
+                id: lesson.id,
+                name: lesson.name
+              }
+            end
           }
         }
       end

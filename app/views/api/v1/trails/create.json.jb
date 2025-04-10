@@ -1,0 +1,5 @@
+# frozen_string_literal
+
+{
+  trail: render('parse_trail', trail: @trail)
+}

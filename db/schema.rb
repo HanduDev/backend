@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_09_230728) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_10_163941) do
   create_table "ai_responses", force: :cascade do |t|
     t.text "user_prompt", null: false
     t.text "system_prompt"
@@ -21,6 +21,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_09_230728) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_ai_responses_on_user_id"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.integer "trail_id", null: false
+    t.string "name", null: false
+    t.string "markdown_content", null: false
+    t.boolean "has_finished", default: false, null: false
+    t.datetime "finished_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trail_id"], name: "index_lessons_on_trail_id"
   end
 
   create_table "trails", force: :cascade do |t|
@@ -59,5 +70,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_09_230728) do
   end
 
   add_foreign_key "ai_responses", "users"
+  add_foreign_key "lessons", "trails"
   add_foreign_key "trails", "users"
 end

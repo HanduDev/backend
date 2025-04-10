@@ -6,12 +6,24 @@ RSpec.describe '/api/v1/trails', type: :request, swagger_doc: 'api/swagger.yaml'
   let(:user) { create(:user) }
 
   before do
-    ai_response = {
+    ai_trail_response = {
       name: Faker::Lorem.sentence,
       description: Faker::Lorem.paragraph
     }.to_json
 
-    allow_any_instance_of(GoogleAiService).to receive(:generate_text).and_return(ai_response)
+    ai_lessons_response = [
+      {
+        name: Faker::Lorem.sentence,
+        markdown_content: Faker::Lorem.paragraph
+      },
+      {
+        name: Faker::Lorem.sentence,
+        markdown_content: Faker::Lorem.paragraph
+      }
+    ].to_json
+
+    allow_any_instance_of(GoogleAiService).to receive(:generate_text)
+      .and_return(ai_trail_response, ai_lessons_response)
   end
 
   path '/api/v1/trails' do

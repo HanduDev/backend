@@ -5,18 +5,22 @@
 # Table name: ai_responses
 #
 #  id            :integer          not null, primary key
-#  user_prompt   :text             not null
-#  system_prompt :text
-#  output        :text             not null
-#  total_tokens  :integer          not null
 #  model         :string           not null
-#  user_id       :integer          not null
+#  output        :text             not null
+#  system_prompt :text
+#  total_tokens  :integer          not null
+#  user_prompt   :text             not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  user_id       :integer          not null
 #
 # Indexes
 #
 #  index_ai_responses_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  user_id  (user_id => users.id)
 #
 
 class AiResponse < ApplicationRecord

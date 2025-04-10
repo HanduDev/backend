@@ -4,7 +4,7 @@ class Api::V1::TrailsController < ApplicationController
   before_action :set_trail, only: %i[show destroy]
 
   def index
-    @trails = @current_user.trails
+    @trails = @current_user.trails.includes(:lessons)
   end
 
   def create
@@ -14,18 +14,32 @@ class Api::V1::TrailsController < ApplicationController
 
     raise(CustomException, prompt.errors.full_messages.to_sentence) unless prompt.errors.empty?
 
-    ai_service = GoogleAiService.new(user: @current_user)
-    ai_response = ai_service.generate_text(prompt: prompt.prompt)
-                            .gsub('```json', '')
-                            .gsub('```', '')
+    ActiveRecord::Base.transaction do
+      ai_service = GoogleAiService.new(user: @current_user)
 
-    ai_response = JSON.parse(ai_response)
+      ai_response = ai_service.generate_text(prompt: prompt.prompt)
+                              .gsub('```json', '')
+                              .gsub('```', '')
 
-    @trail = @current_user.trails.create!(
-      ai_response.merge(language: trail_params[:language])
-    )
+      ai_response = JSON.parse(ai_response)
 
-    render :show, status: :created
+      @trail = @current_user.trails.create!(
+        ai_response.merge(language: trail_params[:language])
+      )
+
+      lessons_prompt = LessonsPrompt.new(
+        trail: @trail
+      )
+
+      ai_lessons_response = ai_service.generate_text(prompt: lessons_prompt.prompt)
+                                      .gsub('```json', '')
+                                      .gsub('```', '')
+
+      lessons_response = JSON.parse(ai_lessons_response)
+      @trail.lessons.create!(lessons_response.map(&:to_h))
+    end
+
+    render :create, status: :created
   rescue JSON::ParserError
     render json: { message: I18n.t('errors/messages.ai_response_invalid') }, status: :internal_server_error
   end

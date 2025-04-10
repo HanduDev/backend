@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+{
+  lessons: @lessons.map do |lesson|
+    {
+      id: lesson.id,
+      name: lesson.name,
+      hasFinished: lesson.has_finished
+    }
+  end
+}

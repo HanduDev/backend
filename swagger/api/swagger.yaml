@@ -18,21 +18,21 @@ paths:
               example:
                 id: 1
                 email: user1@email.com
-                fullName: Maria Santos
+                fullName: Tomás Guedes
                 photoUrl:
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzMzMwNDd9.4Du3lb0ZNGlzQoEIWtFRn3vBCwy0efP0RckmY85lTRY
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzOTQxMDl9.TNE8hAEB7tdNEQvIUgdd0RsM5puTmSq8XFRt6kDQN2w
         '201':
           description: Created and logged successfully
           content:
             application/json:
               example:
                 id: 1
-                email: marylee@nikolaus-mckenzie.example
-                fullName: Roberto Bulhões
-                photoUrl: http://ryan.test/claribel
+                email: wilfred@erdman.example
+                fullName: João Pedro Munhoz
+                photoUrl: http://fritsch-lindgren.test/leda.ratke
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzMzMwNDd9.4Du3lb0ZNGlzQoEIWtFRn3vBCwy0efP0RckmY85lTRY
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzOTQxMTB9.6Hr7qU-OdOiu4TvPnEkrsW45CBMrlqBtlK5Azy36y40
         '401':
           description: Unauthorized
           content:
@@ -50,7 +50,7 @@ paths:
                   properties:
                     token:
                       type: string
-                      example: 8VkcQWFR9qE
+                      example: jXabaYGyaKWf1rib
                   required:
                   - token
               required:
@@ -75,10 +75,10 @@ paths:
               example:
                 id: 1
                 email: user2@email.com
-                fullName: Amanda Vieira
+                fullName: Marina Domingues
                 photoUrl:
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzMzMwNDd9.4Du3lb0ZNGlzQoEIWtFRn3vBCwy0efP0RckmY85lTRY
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzOTQxMTB9.6Hr7qU-OdOiu4TvPnEkrsW45CBMrlqBtlK5Azy36y40
       requestBody:
         content:
           application/json:
@@ -90,10 +90,10 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: gordon@rempel.test
+                      example: felipe@bechtelar.example
                     password:
                       type: string
-                      example: tNZJ40yD8XxAjJWz
+                      example: f8vUodFj
               required:
               - email
               - password
@@ -128,11 +128,11 @@ paths:
             application/json:
               example:
                 id: 2
-                email: sylvie_gutkowski@jacobson-leannon.test
-                fullName: Benício Beltrão Jr.
+                email: vicente@lakin.example
+                fullName: Maria Corte
                 photoUrl:
                 isEmailConfirmed: false
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDQzMzMwNDd9.-xZ4nLxd8qhHva4iqJMuPpGECraSa3LudYM8Wk_kxu4
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDQzOTQxMTB9.UXnpLQu98jCE9cDVtISC2ddCPeOaGAI4Ut1xw0QGXYM
       requestBody:
         content:
           application/json:
@@ -144,13 +144,13 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: rosalina.sanford@tremblay.example
+                      example: boyce_hintz@krajcik-kuphal.example
                     password:
                       type: string
-                      example: WVUwdn5deyBi
+                      example: W7J90npdIdQ37uTF
                     full_name:
                       type: string
-                      example: André Paiva Jr.
+                      example: Sra. Maria Júlia Franco
               required:
               - email
               - password
@@ -194,6 +194,115 @@ paths:
                   name: Russo
                 - acronym: zh
                   name: Chinês
+        '401':
+          description: Expired or invalid session
+          content:
+            application/json:
+              example:
+                message: Sessão expirada ou inválida.
+  "/api/v1/lessons/{id}":
+    delete:
+      summary: Deletes a lesson
+      tags:
+      - Lessons
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ID of the lesson to delete
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Deleted successfully
+        '401':
+          description: Expired or invalid session
+          content:
+            application/json:
+              example:
+                message: Sessão expirada ou inválida.
+        '404':
+          description: Lesson not found
+          content:
+            application/json:
+              example:
+                message: Aula não encontrada
+    get:
+      summary: Show a lesson
+      tags:
+      - Lessons
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ID of the lesson to show
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Returned successfully
+          content:
+            application/json:
+              example:
+                lesson:
+                  id: 1
+                  name: Perferendis maiores ratione qui.
+                  content: Quibusdam est et. Dolores facere qui. Laudantium voluptatibus
+                    fugiat.
+                  hasFinished: false
+                  createdAt: '2025-04-10T14:55:10.350-03:00'
+        '401':
+          description: Expired or invalid session
+          content:
+            application/json:
+              example:
+                message: Sessão expirada ou inválida.
+        '404':
+          description: Lesson not found
+          content:
+            application/json:
+              example:
+                message: Aula não encontrada
+  "/api/v1/lessons":
+    get:
+      summary: Returns a list of lessons
+      tags:
+      - Lessons
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returned successfully
+          content:
+            application/json:
+              example:
+                lessons:
+                - id: 1
+                  name: Aut sit est veniam.
+                  hasFinished: false
+                - id: 2
+                  name: Earum fugit sunt necessitatibus.
+                  hasFinished: false
+                - id: 3
+                  name: Ducimus facilis corrupti ut.
+                  hasFinished: false
         '401':
           description: Expired or invalid session
           content:
@@ -256,11 +365,13 @@ paths:
               example:
                 trail:
                   id: 1
-                  name: Enim temporibus atque quos.
-                  description: Quasi labore qui. Autem et voluptate. Eius nihil necessitatibus.
+                  name: Tenetur et rerum aut.
+                  description: Minima repellendus cumque. Sunt dolores voluptatem.
+                    Esse unde maxime.
                   language:
-                    name: Inglês
-                    code: en
+                    name: Russo
+                    code: ru
+                  progress: 0.0
         '400':
           description: Bad request
           content:
@@ -319,23 +430,26 @@ paths:
               example:
                 trails:
                 - id: 1
-                  name: Dolores magni dolore.
-                  description: Sit sed et. Et molestias et.
+                  name: In eos optio.
+                  description: Enim est ut. Ea qui aliquid.
                   language:
                     name: Inglês
                     code: en
+                  progress: 0
                 - id: 2
-                  name: Impedit repellendus atque.
-                  description: Id voluptate fugiat. Nihil vero sed.
+                  name: Dolore consequatur odio.
+                  description: Error a corporis. Voluptatum delectus corporis.
                   language:
                     name: Inglês
                     code: en
+                  progress: 0
                 - id: 3
-                  name: Quod dicta id.
-                  description: Veritatis nihil nemo. Aut id esse.
+                  name: Distinctio qui libero.
+                  description: Accusantium quo omnis. Voluptatum ab hic.
                   language:
                     name: Inglês
                     code: en
+                  progress: 0
         '401':
           description: Expired or invalid session
           content:
@@ -400,11 +514,19 @@ paths:
               example:
                 trail:
                   id: 1
-                  name: Ipsum mollitia qui.
-                  description: Est praesentium suscipit. Eaque et iste.
+                  name: Ut doloremque dignissimos.
+                  description: Qui ut quia. Voluptates itaque amet.
                   language:
                     name: Inglês
                     code: en
+                  progress: 0.0
+                  lessons:
+                  - id: 1
+                    name: Et asperiores sit voluptatum.
+                  - id: 2
+                    name: Quaerat est eum id.
+                  - id: 3
+                    name: Sed quia ab animi.
         '401':
           description: Expired or invalid session
           content:
@@ -519,8 +641,8 @@ paths:
             application/json:
               example:
                 id: 1
-                email: user19@email.com
-                fullName: Vinícius Brites
+                email: user27@email.com
+                fullName: Isadora Marques
                 photoUrl:
                 isEmailConfirmed: true
         '401':
@@ -576,8 +698,8 @@ paths:
             application/json:
               example:
                 id: 1
-                email: user22@email.com
-                fullName: Srta. Lavínia Mangueira
+                email: user30@email.com
+                fullName: Sr. Eloah Santos
                 photoUrl:
                 isEmailConfirmed: false
         '401':
@@ -618,7 +740,7 @@ paths:
               example:
                 message: Email já confirmado
 servers:
-- url: http://localhost:3000
+- url: http://localhost:8080
   variables:
     defaultHost:
-      default: http://localhost:3000
+      default: http://localhost:8080

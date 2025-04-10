@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Api::V1::TrailsController, :unit, type: :controller do
+RSpec.describe Api::V1::LessonsController, :unit, type: :controller do
   render_views
 
   subject(:send_request) { get :index, format: :json }
@@ -20,10 +20,10 @@ RSpec.describe Api::V1::TrailsController, :unit, type: :controller do
       authenticate_user(user)
     end
 
-    context 'when user has no trails' do
-      let!(:trails) { create_list(:trail, 2) }
+    context 'when user has no lessons' do
+      let!(:lessons) { create_list(:lesson, 2) }
 
-      let(:expected_response) { { trails: [] } }
+      let(:expected_response) { { lessons: [] } }
 
       it 'returns an empty array' do
         send_request
@@ -32,21 +32,17 @@ RSpec.describe Api::V1::TrailsController, :unit, type: :controller do
       end
     end
 
-    context 'when user has trails' do
-      let!(:trails) { create_list(:trail, 2, user: user, language: 'pt') }
+    context 'when user has lessons' do
+      let(:trail) { create(:trail, user: user) }
+      let!(:lessons) { create_list(:lesson, 2, trail: trail) }
 
       let(:expected_response) do
         {
-          trails: trails.map do |trail|
+          lessons: lessons.map do |lesson|
             {
-              id: trail.id,
-              name: trail.name,
-              description: trail.description,
-              language: {
-                name: 'Português',
-                code: trail.language
-              },
-              progress: trail.progress
+              id: lesson.id,
+              name: lesson.name,
+              hasFinished: lesson.has_finished
             }
           end
         }
@@ -54,7 +50,7 @@ RSpec.describe Api::V1::TrailsController, :unit, type: :controller do
 
       it { is_expected.to have_http_status(:ok) }
 
-      it 'returns the trails' do
+      it 'returns the lessons' do
         send_request
 
         expect(json_response).to eq(expected_response)

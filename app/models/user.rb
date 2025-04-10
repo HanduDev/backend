@@ -36,6 +36,7 @@ class User < ApplicationRecord
 
   has_many :ai_responses, dependent: :destroy
   has_many :trails, dependent: :destroy
+  has_many :lessons, through: :trails
 
   def email_confirmed?
     confirmed_email_at.present?

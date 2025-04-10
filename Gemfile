@@ -32,7 +32,7 @@ gem 'rswag-ui'
 gem 'faker'
 
 group :development, :test do
-  gem 'annotate'
+  gem 'annotaterb'
   gem 'brakeman', require: false
   gem 'byebug'
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
