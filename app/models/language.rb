@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ATTRIBUTES = {}.freeze
+
 class Language
   include ActiveModel::Model
   include ActiveModel::Attributes
@@ -12,7 +14,7 @@ class Language
   validates :acronym, presence: true, inclusion: { in: POSSIBLE_LANGUAGES }
   validates :name, presence: true
 
-  def initialize(attributes = {})
+  def initialize(attributes = ATTRIBUTES)
     super
     set_name
   end
