@@ -1,11 +1,13 @@
 # frozen_string_literal
 
+language = Language.new(acronym: trail.language)
+
 {
   id: trail.id,
   name: trail.name,
   description: trail.description,
   language: {
-    name: I18n.t("languages.#{trail.language}"),
-    code: trail.language
+    name: language.name,
+    code: language.acronym
   }
 }

@@ -4,9 +4,12 @@ pt-BR:
     invalid_session: "Sessão expirada ou inválida."
     error: "Erro ao processar a requisição."
     email_not_confirmed: "E-mail não confirmado."
+    ai_response_invalid: "Resposta inválida do assistente."
+
 en:
   errors/messages:
     invalid_login: "Invalid username or password."
     invalid_session: "Expired or invalid session."
     error: "Error processing the request."
     email_not_confirmed: "Email not confirmed."
+    ai_response_invalid: "Resposta inválida do assistente."

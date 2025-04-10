@@ -35,7 +35,7 @@ RSpec.describe '/api/v1/trails', type: :request, swagger_doc: 'api/swagger.yaml'
         end
 
         run_test!
-      end 
+      end
 
       response '404', 'Trail not found' do
         let(:id) { 0 }

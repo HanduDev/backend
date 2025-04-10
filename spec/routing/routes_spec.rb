@@ -56,6 +56,10 @@ RSpec.describe 'Routes', type: :routing do
       expect(get: '/api/v1/trails').to route_to('api/v1/trails#index', format: :json)
     end
 
+    it 'routes to api/v1/trails#create' do
+      expect(post: '/api/v1/trails').to route_to('api/v1/trails#create', format: :json)
+    end
+
     it 'routes to api/v1/trails#show' do
       expect(get: '/api/v1/trails/1').to route_to('api/v1/trails#show', id: '1', format: :json)
     end

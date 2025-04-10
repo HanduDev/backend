@@ -10,7 +10,7 @@ class GoogleAiService
     @current_user = user
   end
 
-  def generate_text(prompt:, system_prompt:)
+  def generate_text(prompt:, system_prompt: '')
     contents = {
       contents: {
         role: 'user',

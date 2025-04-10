@@ -1,0 +1,12 @@
+pt-BR:
+  activemodel:
+    attributes:
+      trail_prompt:
+        language: "Linguagem"
+
+en:
+  activemodel:
+    attributes:
+      trail_prompt:
+        language: "Language"
+
