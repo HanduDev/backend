@@ -16,8 +16,8 @@ class Api::V1::TrailsController < ApplicationController
 
     ai_service = GoogleAiService.new(user: @current_user)
     ai_response = ai_service.generate_text(prompt: prompt.prompt)
-                            .gsub("```json", "")
-                            .gsub("```", "")
+                            .gsub('```json', '')
+                            .gsub('```', '')
 
     ai_response = JSON.parse(ai_response)
 
