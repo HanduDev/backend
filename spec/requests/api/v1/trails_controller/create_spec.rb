@@ -52,23 +52,14 @@ RSpec.describe '/api/v1/trails', type: :request, swagger_doc: 'api/swagger.yaml'
 
       response '201', 'Created successfully' do
         let(:trail_params) do
-          { trail: { language: Language::POSSIBLE_LANGUAGES.sample } }
-        end
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json': {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
+          {
+            language: 'pt',
+            developments: [Faker::Lorem.sentence],
+            level: 'beginner',
+            time_to_learn: Faker::Number.between(from: 1, to: 10).to_s,
+            time_to_study: Faker::Number.between(from: 1, to: 10).to_s,
+            themes: [Faker::Lorem.sentence]
           }
-        end
-
-        run_test!
-      end
-
-      response '400', 'Bad request' do
-        let(:trail_params) do
-          { trail: { language: 'invalid_language' } }
         end
 
         after do |example|
@@ -85,6 +76,29 @@ RSpec.describe '/api/v1/trails', type: :request, swagger_doc: 'api/swagger.yaml'
       response '401', 'Expired or invalid session' do
         let(:Authorization) { nil }
         let(:trail_params) {}
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json': {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+
+        run_test!
+      end
+
+      response '422', 'Invalid body' do
+        let(:trail_params) do
+          {
+            language: 'any_language',
+            developments: '',
+            level: '',
+            time_to_learn: '',
+            time_to_study: '',
+            themes: ''
+          }
+        end
 
         after do |example|
           example.metadata[:response][:content] = {

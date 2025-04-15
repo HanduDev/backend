@@ -7,5 +7,10 @@ FactoryBot.define do
     language { 'en' }
     description { Faker::Lorem.paragraph(sentence_count: 2) }
     association :user, factory: :user
+    themes { 'theme1, theme2' }
+    level { 'beginner' }
+    developments { 'development1, development2' }
+    time_to_learn { '1 hour' }
+    time_to_study { '2 hours' }
   end
 end

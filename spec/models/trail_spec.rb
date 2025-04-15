@@ -4,14 +4,19 @@
 #
 # Table name: trails
 #
-#  id          :integer          not null, primary key
-#  description :text             not null
-#  language    :string           not null
-#  name        :string           not null
-#  started_at  :date
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  user_id     :integer
+#  id            :integer          not null, primary key
+#  description   :text             not null
+#  developments  :string           default(""), not null
+#  language      :string           not null
+#  level         :string           default(""), not null
+#  name          :string           not null
+#  started_at    :date
+#  themes        :string           default(""), not null
+#  time_to_learn :string           default(""), not null
+#  time_to_study :string           default(""), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  user_id       :integer
 #
 # Indexes
 #
@@ -41,6 +46,11 @@ RSpec.describe Trail, type: :model do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to have_many(:lessons) }
     it { is_expected.to validate_inclusion_of(:language).in_array(Language::POSSIBLE_LANGUAGES) }
+    it { is_expected.to validate_presence_of(:level) }
+    it { is_expected.to validate_presence_of(:themes) }
+    it { is_expected.to validate_presence_of(:time_to_learn) }
+    it { is_expected.to validate_presence_of(:time_to_study) }
+    it { is_expected.to validate_presence_of(:developments) }
   end
 
   context 'progress' do
@@ -60,6 +70,17 @@ RSpec.describe Trail, type: :model do
       it 'returns 0' do
         expect(trail.progress).to eq(0)
       end
+    end
+  end
+
+  context 'with arrays' do
+    let(:trail) { build(:trail, level: %w[beginner intermediate]) }
+
+    it 'transforms the array into a string' do
+      trail.save!
+
+      expect(trail).to be_valid
+      expect(trail.reload.level).to be_a(String)
     end
   end
 end

@@ -22,7 +22,7 @@ AllCops:
     - 'lib/tasks/**/*'
 
 Metrics/BlockLength:
-  AllowedMethods: ['describe', 'context', 'path', 'post', 'get', 'put', 'delete']
+  AllowedMethods: ['describe', 'context', 'path', 'post', 'get', 'put', 'delete', 'it']
 
 Layout/LineLength:
   Exclude:

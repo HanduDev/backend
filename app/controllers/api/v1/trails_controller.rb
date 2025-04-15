@@ -8,14 +8,18 @@ class Api::V1::TrailsController < ApplicationController
   end
 
   def create
-    prompt = TrailPrompt.new(
-      language: Language.new(acronym: trail_params[:language])
-    )
-
-    raise(CustomException, prompt.errors.full_messages.to_sentence) unless prompt.errors.empty?
-
     ActiveRecord::Base.transaction do
       ai_service = GoogleAiService.new(user: @current_user)
+
+      @trail = @current_user.trails.new(
+        trail_params.merge(name: 'Processing...', description: 'Processing...')
+      )
+
+      prompt = TrailPrompt.new(
+        trail: @trail
+      )
+
+      raise(ActiveRecord::RecordInvalid, @trail) unless @trail.valid?
 
       ai_response = ai_service.generate_text(prompt: prompt.prompt)
                               .gsub('```json', '')
@@ -23,9 +27,8 @@ class Api::V1::TrailsController < ApplicationController
 
       ai_response = JSON.parse(ai_response)
 
-      @trail = @current_user.trails.create!(
-        ai_response.merge(language: trail_params[:language])
-      )
+      @trail.assign_attributes(ai_response)
+      @trail.save!
 
       lessons_prompt = LessonsPrompt.new(
         trail: @trail
@@ -59,6 +62,8 @@ class Api::V1::TrailsController < ApplicationController
   end
 
   def trail_params
-    params.require(:trail).permit(:language)
+    params.require(:trail).permit(:language, :name, :description, :started_at,
+                                  :level, :time_to_learn, :time_to_study,
+                                  developments: [], themes: [])
   end
 end

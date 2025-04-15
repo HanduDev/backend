@@ -22,11 +22,12 @@
 require 'spec_helper'
 
 RSpec.describe TrailPrompt, type: :model do
-  let(:language) { Language.new(acronym: 'en') }
+  let(:trail) { build(:trail, language: language) }
+  let(:language) { 'en' }
 
   context 'validations' do
     context 'is valid with valid attributes' do
-      let(:trail_prompt) { described_class.new(language: language) }
+      let(:trail_prompt) { described_class.new(trail: trail) }
 
       it do
         expect(trail_prompt).to be_valid
@@ -35,17 +36,19 @@ RSpec.describe TrailPrompt, type: :model do
 
     context 'is invalid with invalid attributes' do
       let(:trail_prompt) do
-        described_class.new(language: Language.new(acronym: 'any_language'))
+        described_class.new(trail: trail)
       end
 
+      let(:language) { 'invalid_language' }
+
       it do
-        expect(trail_prompt.errors.full_messages).to eq(['Linguagem não está incluído na lista'])
+        expect(trail).to be_invalid
       end
     end
   end
 
   context 'prompt' do
-    let(:trail_prompt) { described_class.new(language: language) }
+    let(:trail_prompt) { described_class.new(trail: trail) }
 
     it do
       expect(trail_prompt.prompt).to eq("Você é um professor especialista e fluente em Inglês.
@@ -60,14 +63,24 @@ Retorne a resposta em formato JSON, seguindo o seguinte exemplo:
   \"description\": \"Descrição da trilha\"
 }
 
+O usuário forneceu as seguintes preferências, siga-as rigorosamente:
+<preferencias>
+  1. Nível de conhecimento do aluno: #{trail.level}
+  2. Temas de interesse: #{trail.themes} (fale sobre esses temas)
+  3. Tempo total da trilha deve ser: #{trail.time_to_learn}
+  4. Tempo para estudar diariamente: #{trail.time_to_study}
+  5. O que o usuário quer desenvolver: #{trail.developments}
+</preferencias>
+
 Os dados devem todos ser respondidos em português (BR).")
     end
   end
 
   Language::POSSIBLE_LANGUAGES.each do |language|
     context "with #{language} language" do
+      let(:language) { language }
       let(:trail_prompt) do
-        described_class.new(language: Language.new(acronym: language))
+        described_class.new(trail: trail)
       end
 
       it do

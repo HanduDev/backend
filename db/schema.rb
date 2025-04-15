@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_10_163941) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_14_233225) do
   create_table "ai_responses", force: :cascade do |t|
     t.text "user_prompt", null: false
     t.text "system_prompt"
@@ -42,6 +42,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_10_163941) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "themes", default: "", null: false
+    t.string "level", default: "", null: false
+    t.string "developments", default: "", null: false
+    t.string "time_to_learn", default: "", null: false
+    t.string "time_to_study", default: "", null: false
     t.index ["user_id"], name: "index_trails_on_user_id"
   end
 

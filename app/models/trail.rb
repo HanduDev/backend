@@ -4,14 +4,19 @@
 #
 # Table name: trails
 #
-#  id          :integer          not null, primary key
-#  description :text             not null
-#  language    :string           not null
-#  name        :string           not null
-#  started_at  :date
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  user_id     :integer
+#  id            :integer          not null, primary key
+#  description   :text             not null
+#  developments  :string           default(""), not null
+#  language      :string           not null
+#  level         :string           default(""), not null
+#  name          :string           not null
+#  started_at    :date
+#  themes        :string           default(""), not null
+#  time_to_learn :string           default(""), not null
+#  time_to_study :string           default(""), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  user_id       :integer
 #
 # Indexes
 #
@@ -28,8 +33,14 @@ class Trail < ApplicationRecord
   validates :name, presence: true
   validates :language, presence: true
   validates :description, presence: true
-
+  validates :level, presence: true
+  validates :themes, presence: true
+  validates :time_to_learn, presence: true
+  validates :time_to_study, presence: true
+  validates :developments, presence: true
   validates :language, inclusion: { in: Language::POSSIBLE_LANGUAGES }
+
+  has_many :lessons, dependent: :destroy
 
   def lang
     Language.new(acronym: self.language)

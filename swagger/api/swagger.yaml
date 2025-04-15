@@ -18,21 +18,21 @@ paths:
               example:
                 id: 1
                 email: user1@email.com
-                fullName: Tomás Guedes
+                fullName: Luiza Domingues Filho
                 photoUrl:
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzOTQxMDl9.TNE8hAEB7tdNEQvIUgdd0RsM5puTmSq8XFRt6kDQN2w
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQ3NjU1MDF9.Wp9f5ZR_88D2ZKC3Qb9C3KLFCDM5-bF4O3DOgq171Ys
         '201':
           description: Created and logged successfully
           content:
             application/json:
               example:
                 id: 1
-                email: wilfred@erdman.example
-                fullName: João Pedro Munhoz
-                photoUrl: http://fritsch-lindgren.test/leda.ratke
+                email: roy@strosin.test
+                fullName: Ana Luiza Dias
+                photoUrl: http://fadel-pouros.test/dee_terry
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzOTQxMTB9.6Hr7qU-OdOiu4TvPnEkrsW45CBMrlqBtlK5Azy36y40
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQ3NjU1MDF9.Wp9f5ZR_88D2ZKC3Qb9C3KLFCDM5-bF4O3DOgq171Ys
         '401':
           description: Unauthorized
           content:
@@ -50,7 +50,7 @@ paths:
                   properties:
                     token:
                       type: string
-                      example: jXabaYGyaKWf1rib
+                      example: aGPmwFPBC2lA
                   required:
                   - token
               required:
@@ -75,10 +75,10 @@ paths:
               example:
                 id: 1
                 email: user2@email.com
-                fullName: Marina Domingues
+                fullName: Dr. Davi Luca do Prado
                 photoUrl:
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQzOTQxMTB9.6Hr7qU-OdOiu4TvPnEkrsW45CBMrlqBtlK5Azy36y40
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDQ3NjU1MDF9.Wp9f5ZR_88D2ZKC3Qb9C3KLFCDM5-bF4O3DOgq171Ys
       requestBody:
         content:
           application/json:
@@ -90,10 +90,10 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: felipe@bechtelar.example
+                      example: jeremiah@hoppe-buckridge.test
                     password:
                       type: string
-                      example: f8vUodFj
+                      example: RDrPUopnn9mRiV5
               required:
               - email
               - password
@@ -128,11 +128,11 @@ paths:
             application/json:
               example:
                 id: 2
-                email: vicente@lakin.example
-                fullName: Maria Corte
+                email: fredric.vandervort@jakubowski.example
+                fullName: Ana Beatriz Corrêa Jr.
                 photoUrl:
                 isEmailConfirmed: false
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDQzOTQxMTB9.UXnpLQu98jCE9cDVtISC2ddCPeOaGAI4Ut1xw0QGXYM
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDQ3NjU1MDF9.4iHJwhVMv2bSYQzWU8vkfEqDhXZ44EFtFCPUagafciE
       requestBody:
         content:
           application/json:
@@ -144,13 +144,13 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: boyce_hintz@krajcik-kuphal.example
+                      example: houston@pfeffer-connelly.test
                     password:
                       type: string
-                      example: W7J90npdIdQ37uTF
+                      example: ZdrPaR5y
                     full_name:
                       type: string
-                      example: Sra. Maria Júlia Franco
+                      example: Sr. João Victor de Borba
               required:
               - email
               - password
@@ -258,11 +258,10 @@ paths:
               example:
                 lesson:
                   id: 1
-                  name: Perferendis maiores ratione qui.
-                  content: Quibusdam est et. Dolores facere qui. Laudantium voluptatibus
-                    fugiat.
+                  name: Libero rerum quisquam debitis.
+                  content: Dolores quae corrupti. Consequatur est et. Rem hic blanditiis.
                   hasFinished: false
-                  createdAt: '2025-04-10T14:55:10.350-03:00'
+                  createdAt: '2025-04-14T22:05:02.855-03:00'
         '401':
           description: Expired or invalid session
           content:
@@ -295,13 +294,13 @@ paths:
               example:
                 lessons:
                 - id: 1
-                  name: Aut sit est veniam.
+                  name: Esse aut autem facilis.
                   hasFinished: false
                 - id: 2
-                  name: Earum fugit sunt necessitatibus.
+                  name: Quas aperiam dolorem quae.
                   hasFinished: false
                 - id: 3
-                  name: Ducimus facilis corrupti ut.
+                  name: Debitis cupiditate accusamus qui.
                   hasFinished: false
         '401':
           description: Expired or invalid session
@@ -365,25 +364,41 @@ paths:
               example:
                 trail:
                   id: 1
-                  name: Tenetur et rerum aut.
-                  description: Minima repellendus cumque. Sunt dolores voluptatem.
-                    Esse unde maxime.
+                  name: Et et doloribus architecto.
+                  description: Consectetur consequatur repudiandae. Itaque odit nesciunt.
+                    Veniam tenetur sint.
                   language:
-                    name: Russo
-                    code: ru
+                    name: Português
+                    code: pt
                   progress: 0.0
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              example:
-                message: Linguagem não está incluído na lista
         '401':
           description: Expired or invalid session
           content:
             application/json:
               example:
                 message: Sessão expirada ou inválida.
+        '422':
+          description: Invalid body
+          content:
+            application/json:
+              example:
+                message: 'A validação falhou: Level não pode ficar em branco, Themes
+                  não pode ficar em branco, Time to learn não pode ficar em branco,
+                  Time to study não pode ficar em branco, Developments não pode ficar
+                  em branco, Linguagem não está incluído na lista'
+                errors:
+                  level:
+                  - não pode ficar em branco
+                  themes:
+                  - não pode ficar em branco
+                  time_to_learn:
+                  - não pode ficar em branco
+                  time_to_study:
+                  - não pode ficar em branco
+                  developments:
+                  - não pode ficar em branco
+                  language:
+                  - não está incluído na lista
       requestBody:
         content:
           application/json:
@@ -430,22 +445,22 @@ paths:
               example:
                 trails:
                 - id: 1
-                  name: In eos optio.
-                  description: Enim est ut. Ea qui aliquid.
+                  name: Ut iusto id.
+                  description: Et voluptatem enim. Doloribus dolores laudantium.
                   language:
                     name: Inglês
                     code: en
                   progress: 0
                 - id: 2
-                  name: Dolore consequatur odio.
-                  description: Error a corporis. Voluptatum delectus corporis.
+                  name: Rem ipsum sint.
+                  description: Blanditiis voluptatem corrupti. Id omnis tempore.
                   language:
                     name: Inglês
                     code: en
                   progress: 0
                 - id: 3
-                  name: Distinctio qui libero.
-                  description: Accusantium quo omnis. Voluptatum ab hic.
+                  name: Voluptatibus dolorem voluptas.
+                  description: Ut accusamus quia. Id nemo ipsum.
                   language:
                     name: Inglês
                     code: en
@@ -514,19 +529,19 @@ paths:
               example:
                 trail:
                   id: 1
-                  name: Ut doloremque dignissimos.
-                  description: Qui ut quia. Voluptates itaque amet.
+                  name: Eveniet aut enim.
+                  description: Cupiditate qui nostrum. In eius ipsa.
                   language:
                     name: Inglês
                     code: en
                   progress: 0.0
                   lessons:
                   - id: 1
-                    name: Et asperiores sit voluptatum.
+                    name: Nulla impedit et architecto.
                   - id: 2
-                    name: Quaerat est eum id.
+                    name: Ut deleniti molestiae molestias.
                   - id: 3
-                    name: Sed quia ab animi.
+                    name: Et accusamus quaerat sit.
         '401':
           description: Expired or invalid session
           content:
@@ -642,7 +657,7 @@ paths:
               example:
                 id: 1
                 email: user27@email.com
-                fullName: Isadora Marques
+                fullName: Antonella Longuinho Filho
                 photoUrl:
                 isEmailConfirmed: true
         '401':
@@ -699,7 +714,7 @@ paths:
               example:
                 id: 1
                 email: user30@email.com
-                fullName: Sr. Eloah Santos
+                fullName: Sr. Olívia da Luz
                 photoUrl:
                 isEmailConfirmed: false
         '401':
@@ -740,7 +755,7 @@ paths:
               example:
                 message: Email já confirmado
 servers:
-- url: http://localhost:8080
+- url: http://localhost:3000
   variables:
     defaultHost:
-      default: http://localhost:8080
+      default: http://localhost:3000

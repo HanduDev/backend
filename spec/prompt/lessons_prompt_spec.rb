@@ -56,6 +56,15 @@ Entre as 10 aulas, coloque pelo menos 2 aulas práticas, onde o aluno deve prati
 As aulas práticas devem conter um exercício prático e uma solução.
 As aulas práticas devem ser numeradas como 'Aula Prática 1', 'Aula Prática 2', etc.
 
+O usuário forneceu as seguintes preferências, siga-as rigorosamente:
+<preferencias>
+  1. Nível de conhecimento do aluno: #{trail.level}
+  2. Temas de interesse: #{trail.themes} (fale sobre esses temas)
+  3. Tempo total da trilha deve ser: #{trail.time_to_learn}
+  4. Tempo para estudar diariamente: #{trail.time_to_study}
+  5. O que o usuário quer desenvolver: #{trail.developments}
+</preferencias>
+
 Retorne a resposta em formato JSON, seguindo o seguinte exemplo:
 {
   \"name\": \"Nome da aula\",
