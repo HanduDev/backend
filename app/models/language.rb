@@ -6,7 +6,43 @@ class Language
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  POSSIBLE_LANGUAGES = %w[en es fr de it ja ko pt ru zh].freeze
+  POSSIBLE_LANGUAGES = %w[
+    af
+    ar
+    az
+    ba
+    be
+    bg
+    ca
+    cs
+    cy
+    da
+    de
+    el
+    en
+    en-us
+    es
+    et
+    fa
+    fi
+    fo
+    fr
+    gl
+    gu
+    he
+    hi
+    hr
+    hu
+    hy
+    id
+    is
+    it
+    lt
+    pt
+    pt-br
+    sk
+    sv
+    tr].freeze
 
   attribute :acronym, :string
   attribute :name, :string

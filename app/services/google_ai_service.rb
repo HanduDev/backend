@@ -1,33 +1,45 @@
 # frozen_string_literal: true
 
-require 'gemini-ai'
 
 class GoogleAiService
   def initialize(user:)
-    @client = GeminiAi::Client.new(
-      api_key: ENV.fetch('GEMINI_AI_API_KEY', nil)
-    )
-    @current_user = user
+    @url = "#{ENV.fetch('GEMINI_AI_URL', nil)}"
   end
 
   def generate_text(prompt:, system_prompt: '')
-    contents = {
-      contents: {
-        role: 'user',
-        parts: {
-          text: "#{system_prompt}\n#{prompt}"
-        }
-      }
-    }
+    contents = "#{system_prompt}\n#{prompt}"
 
-    response = @client.generate_content(
-      contents,
-      model: 'gemini-2.0-flash'
-    )
+    params = {}
+    params[:key] = ENV.fetch('GEMINI_AI_API_KEY', nil)
 
-    message = response['candidates']&.first&.[]('content')&.[]('parts')&.first&.[]('text')
+    uri = URI(@url)
+    uri.query = URI.encode_www_form(params) if params.present?
 
-    raise(CustomException, 'No response from Google AI') if message.nil?
+    response = Faraday.post(uri.to_s) do |req|
+      req.body = {
+        contents: [
+          {
+            parts: [
+              {
+                text: contents
+              }
+            ]
+          }
+        ]
+      }.to_json
+
+      req.headers['Content-Type'] = 'application/json'
+    end
+
+    puts "Response Status: #{response.status}"
+    puts "Response Headers: #{response.headers}"
+    puts "Response Body: #{response.body}"
+
+    raise(CustomException, response.body) unless response.success?
+
+    message = JSON.parse(response.body, symbolize_names: true)[:candidates].first[:content][:parts].first[:text]
+
+    raise(CustomException, 'No response from Google AI') if message.blank?
 
     formatted_response = {
       message: message.strip,

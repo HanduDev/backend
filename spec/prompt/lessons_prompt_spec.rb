@@ -65,15 +65,18 @@ O usuário forneceu as seguintes preferências, siga-as rigorosamente:
   5. O que o usuário quer desenvolver: #{trail.developments}
 </preferencias>
 
+Lembre-se que você deve criar 10 aulas, então a resposta deve conter 10 objetos JSON (array), cada um representando uma aula.
+Você está criando o plano para o aluno, e não para o professor, então torne o texto o mais didático possível para todos conseguirem entender.
+Os dados devem todos ser respondidos em português (BR).
+
+Os conteúdos devem ser extremamente detalhados e completos, com exemplos práticos.
+Cada markdown deve ter no mínimo 500 palavras.
+
 Retorne a resposta em formato JSON, seguindo o seguinte exemplo:
 {
   \"name\": \"Nome da aula\",
   \"markdown_content\": \"Descrição da aula em markdown\"
-}
-
-Lembre-se que você deve criar 10 aulas, então a resposta deve conter 10 objetos JSON (array), cada um representando uma aula.
-
-Os dados devem todos ser respondidos em português (BR).")
+}")
     end
   end
 end

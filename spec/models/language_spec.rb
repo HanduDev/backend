@@ -3,12 +3,6 @@
 require 'spec_helper'
 
 RSpec.describe Language, type: :model do
-  context 'possible_languages' do
-    it do
-      expect(Language::POSSIBLE_LANGUAGES).to eq(%w[en es fr de it ja ko pt ru zh])
-    end
-  end
-
   Language::POSSIBLE_LANGUAGES.each do |language|
     context "with #{language} language" do
       let(:language_class) { described_class.new(acronym: language) }

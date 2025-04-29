@@ -54,14 +54,8 @@ RSpec.describe TrailPrompt, type: :model do
       expect(trail_prompt.prompt).to eq("Você é um professor especialista e fluente em Inglês.
 Você deve criar uma trilha de aprendizado para o aluno.
 Sua resposta deve conter as seguintes informações:
-1. Nome da trilha
+1. Nome da trilha (curto e objetivo)
 2. Descrição da trilha
-
-Retorne a resposta em formato JSON, seguindo o seguinte exemplo:
-{
-  \"name\": \"Nome da trilha\",
-  \"description\": \"Descrição da trilha\"
-}
 
 O usuário forneceu as seguintes preferências, siga-as rigorosamente:
 <preferencias>
@@ -72,7 +66,13 @@ O usuário forneceu as seguintes preferências, siga-as rigorosamente:
   5. O que o usuário quer desenvolver: #{trail.developments}
 </preferencias>
 
-Os dados devem todos ser respondidos em português (BR).")
+Os dados devem todos ser respondidos em português (BR).
+
+Retorne a resposta em formato JSON, seguindo o seguinte exemplo:
+{
+  \"name\": \"Nome da trilha\",
+  \"description\": \"Descrição da trilha\"
+}")
     end
   end
 

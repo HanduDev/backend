@@ -30,6 +30,7 @@ gem 'rswag-api'
 gem 'rswag-ui'
 
 gem 'faker'
+gem 'faraday'
 
 group :development, :test do
   gem 'annotaterb'
