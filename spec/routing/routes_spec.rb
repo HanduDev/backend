@@ -67,6 +67,12 @@ RSpec.describe 'Routes', type: :routing do
     it 'routes to api/v1/trails#destroy' do
       expect(delete: '/api/v1/trails/1').to route_to('api/v1/trails#destroy', id: '1', format: :json)
     end
+
+    describe 'check_answer' do
+      it 'routes to api/v1/trails/check_answer#update' do
+        expect(put: '/api/v1/trails/check_answer/1').to route_to('api/v1/trails/check_answer#update', id: '1', format: :json)
+      end
+    end
   end
 
   describe 'lessons' do
@@ -80,6 +86,10 @@ RSpec.describe 'Routes', type: :routing do
 
     it 'routes to api/v1/lessons#destroy' do
       expect(delete: '/api/v1/lessons/1').to route_to('api/v1/lessons#destroy', id: '1', format: :json)
+    end
+
+    it 'routes to api/v1/lessons#update' do
+      expect(put: '/api/v1/lessons/1').to route_to('api/v1/lessons#update', id: '1', format: :json)
     end
   end
 end

@@ -5,10 +5,14 @@
 # Table name: lessons
 #
 #  id               :integer          not null, primary key
+#  activity_type    :string
+#  expected_answer  :string
 #  finished_at      :datetime
 #  has_finished     :boolean          default(FALSE), not null
-#  markdown_content :string           not null
+#  markdown_content :text             default("")
 #  name             :string           not null
+#  question         :string
+#  user_answer      :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  trail_id         :integer          not null

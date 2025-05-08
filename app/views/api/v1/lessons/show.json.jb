@@ -2,12 +2,19 @@
 
 lesson = @lesson
 
+lesson_hash = {
+  id: lesson.id,
+  name: lesson.name,
+  content: lesson.markdown_content,
+  hasFinished: lesson.has_finished,
+  createdAt: lesson.created_at,
+  activityType: lesson.activity_type,
+  question: lesson.question,
+  userAnswer: lesson.user_answer
+}
+
+lesson_hash[:options] = lesson.options.select(:id, :content) if lesson.options.present?
+
 {
-  lesson: {
-    id: lesson.id,
-    name: lesson.name,
-    content: lesson.markdown_content,
-    hasFinished: lesson.has_finished,
-    createdAt: lesson.created_at
-  }
+  lesson: lesson_hash
 }

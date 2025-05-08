@@ -10,39 +10,63 @@ class Api::V1::TrailsController < ApplicationController
   end
 
   def create
-    ai_service = GoogleAiService.new(user: @current_user)
+    ActiveRecord::Base.transaction do
+      ai_service = GoogleAiService.new(user: @current_user)
 
-    @trail = @current_user.trails.new(
-      trail_params.merge(name: 'Processing...', description: 'Processing...')
-    )
+      @trail = @current_user.trails.new(
+        trail_params.merge(name: 'Processing...', description: 'Processing...')
+      )
 
-    prompt = TrailPrompt.new(
-      trail: @trail
-    )
+      prompt = TrailPrompt.new(
+        trail: @trail
+      )
 
-    raise(ActiveRecord::RecordInvalid, @trail) unless @trail.valid?
+      raise(ActiveRecord::RecordInvalid, @trail) unless @trail.valid?
 
-    ai_response = ai_service.generate_text(prompt: prompt.prompt)
-                            .gsub('```json', '')
-                            .gsub('```', '')
-                            .strip
+      ai_response = ai_service.generate_text(prompt: prompt.prompt)
+                              .gsub('```json', '')
+                              .gsub('```', '')
+                              .strip
 
-    ai_response = JSON.parse(sanitize_json_string(ai_response))
+      ai_response = JSON.parse(sanitize_json_string(ai_response))
 
-    @trail.assign_attributes(ai_response)
-    @trail.save!
+      @trail.assign_attributes(ai_response)
+      @trail.save!
 
-    lessons_prompt = LessonsPrompt.new(
-      trail: @trail
-    )
+      lessons_prompt = LessonsPrompt.new(
+        trail: @trail
+      )
 
-    ai_lessons_response = ai_service.generate_text(prompt: lessons_prompt.prompt)
-                                    .gsub('```json', '')
-                                    .gsub('```', '')
-                                    .strip
+      ai_lessons_response = ai_service.generate_text(prompt: lessons_prompt.prompt)
+                                      .gsub('```json', '')
+                                      .gsub('```', '')
+                                      .strip
 
-    lessons_response = JSON.parse(sanitize_json_string(ai_lessons_response))
-    @trail.lessons.create!(lessons_response.map(&:to_h))
+      lessons_response = JSON.parse(sanitize_json_string(ai_lessons_response))
+
+      lessons_response_without_options = lessons_response.map do |lesson|
+        if lesson['options'].present?
+          lesson.except('options')
+        else
+          lesson
+        end
+      end
+
+      lessons = @trail.lessons.create!(lessons_response_without_options.map(&:to_h))
+
+      options = []
+
+      lessons.each_with_index do |lesson, index|
+        next if lessons_response[index]['options'].blank?
+
+        options << lessons_response[index]['options'].map do |option|
+          option['lesson_id'] = lesson.id
+          option
+        end
+      end
+
+      Option.create!(options)
+    end
 
     render :create, status: :created
   rescue JSON::ParserError => e

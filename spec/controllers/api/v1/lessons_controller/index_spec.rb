@@ -42,7 +42,8 @@ RSpec.describe Api::V1::LessonsController, :unit, type: :controller do
             {
               id: lesson.id,
               name: lesson.name,
-              hasFinished: lesson.has_finished
+              hasFinished: lesson.has_finished,
+              activityType: lesson.activity_type,
             }
           end
         }

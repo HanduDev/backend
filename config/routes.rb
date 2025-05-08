@@ -19,8 +19,12 @@ Rails.application.routes.draw do
 
         resources :translate_text, only: :create
         resources :languages, only: :index
-        resources :trails, only: [:index, :show, :destroy, :create]
-        resources :lessons, only: [:index, :show, :destroy]
+        resources :trails, only: [:index, :show, :destroy, :create] do
+          collection do
+            resources :check_answer, only: :update, module: :trails
+          end
+        end
+        resources :lessons, only: [:index, :show, :destroy, :update]
       end
     end
 

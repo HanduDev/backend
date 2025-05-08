@@ -2,6 +2,6 @@
 
 {
   trail: render('parse_trail', trail: @trail).merge(
-    lessons: @trail.lessons.map { |lesson| { id: lesson.id, name: lesson.name } }
+    lessons: @trail.lessons.map { |lesson| { id: lesson.id, name: lesson.name, hasFinished: lesson.has_finished } }
   )
 }

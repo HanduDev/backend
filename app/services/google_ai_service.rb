@@ -4,6 +4,7 @@
 class GoogleAiService
   def initialize(user:)
     @url = "#{ENV.fetch('GEMINI_AI_URL', nil)}"
+    @user = user
   end
 
   def generate_text(prompt:, system_prompt: '')
@@ -33,24 +34,25 @@ class GoogleAiService
 
     puts "Response Status: #{response.status}"
     puts "Response Headers: #{response.headers}"
-    puts "Response Body: #{response.body}"
 
     raise(CustomException, response.body) unless response.success?
 
-    message = JSON.parse(response.body, symbolize_names: true)[:candidates].first[:content][:parts].first[:text]
+    json_response = JSON.parse(response.body, symbolize_names: true)
+    puts "Response Body: #{json_response[:candidates].first[:content][:parts].first[:text]}"
+    message = json_response[:candidates].first[:content][:parts].first[:text]
 
     raise(CustomException, 'No response from Google AI') if message.blank?
 
     formatted_response = {
       message: message.strip,
       metadata: {
-        prompt_tokens: response['usageMetadata']['promptTokenCount'],
-        candidate_tokens: response['usageMetadata']['candidatesTokenCount'],
-        model: response['modelVersion']
+        prompt_tokens: json_response[:usageMetadata][:promptTokenCount],
+        candidate_tokens: json_response[:usageMetadata][:candidatesTokenCount],
+        model: json_response[:modelVersion]
       }
     }
 
-    @current_user.ai_responses.create!(
+    @user.ai_responses.create!(
       user_prompt: prompt,
       system_prompt: system_prompt,
       output: formatted_response[:message],

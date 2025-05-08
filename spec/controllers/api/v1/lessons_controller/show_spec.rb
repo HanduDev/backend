@@ -45,8 +45,13 @@ RSpec.describe Api::V1::LessonsController, :unit, type: :controller do
             name: lesson.name,
             content: lesson.markdown_content,
             hasFinished: lesson.has_finished,
-            createdAt: lesson.created_at
-          }
+            createdAt: lesson.created_at,
+            activityType: lesson.activity_type,
+            question: lesson.question
+          }.tap do |hash|
+            return hash unless lesson.options.present?
+            hash[:options] = lesson.options.select(:id, :content)
+          end
         }
       end
 

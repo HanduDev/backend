@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_14_233225) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_08_111756) do
   create_table "ai_responses", force: :cascade do |t|
     t.text "user_prompt", null: false
     t.text "system_prompt"
@@ -26,12 +26,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_14_233225) do
   create_table "lessons", force: :cascade do |t|
     t.integer "trail_id", null: false
     t.string "name", null: false
-    t.string "markdown_content", null: false
+    t.text "markdown_content", default: ""
     t.boolean "has_finished", default: false, null: false
     t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "activity_type"
+    t.string "question"
+    t.string "expected_answer"
+    t.string "user_answer"
     t.index ["trail_id"], name: "index_lessons_on_trail_id"
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.string "content", null: false
+    t.boolean "correct", default: false, null: false
+    t.integer "lesson_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_options_on_lesson_id"
   end
 
   create_table "trails", force: :cascade do |t|
@@ -76,5 +89,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_14_233225) do
 
   add_foreign_key "ai_responses", "users"
   add_foreign_key "lessons", "trails"
+  add_foreign_key "options", "lessons"
   add_foreign_key "trails", "users"
 end
