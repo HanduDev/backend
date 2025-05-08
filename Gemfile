@@ -31,6 +31,8 @@ gem 'rswag-ui'
 
 gem 'faker'
 gem 'faraday'
+gem 'sidekiq'
+gem 'redis'
 
 group :development, :test do
   gem 'annotaterb'

@@ -10,65 +10,11 @@ class Api::V1::TrailsController < ApplicationController
   end
 
   def create
-    ActiveRecord::Base.transaction do
-      ai_service = GoogleAiService.new(user: @current_user)
+    json_params = JSON.parse(trail_params.to_json)
 
-      @trail = @current_user.trails.new(
-        trail_params.merge(name: 'Processing...', description: 'Processing...')
-      )
+    ::CreateTrailWorker.perform_async(json_params, @current_user.id)
 
-      prompt = TrailPrompt.new(
-        trail: @trail
-      )
-
-      raise(ActiveRecord::RecordInvalid, @trail) unless @trail.valid?
-
-      ai_response = ai_service.generate_text(prompt: prompt.prompt)
-                              .gsub('```json', '')
-                              .gsub('```', '')
-                              .strip
-
-      ai_response = JSON.parse(sanitize_json_string(ai_response))
-
-      @trail.assign_attributes(ai_response)
-      @trail.save!
-
-      lessons_prompt = LessonsPrompt.new(
-        trail: @trail
-      )
-
-      ai_lessons_response = ai_service.generate_text(prompt: lessons_prompt.prompt)
-                                      .gsub('```json', '')
-                                      .gsub('```', '')
-                                      .strip
-
-      lessons_response = JSON.parse(sanitize_json_string(ai_lessons_response))
-
-      lessons_response_without_options = lessons_response.map do |lesson|
-        if lesson['options'].present?
-          lesson.except('options')
-        else
-          lesson
-        end
-      end
-
-      lessons = @trail.lessons.create!(lessons_response_without_options.map(&:to_h))
-
-      options = []
-
-      lessons.each_with_index do |lesson, index|
-        next if lessons_response[index]['options'].blank?
-
-        options << lessons_response[index]['options'].map do |option|
-          option['lesson_id'] = lesson.id
-          option
-        end
-      end
-
-      Option.create!(options)
-    end
-
-    render :create, status: :created
+    render json: { message: I18n.t('messages.trail_created') }, status: :created
   rescue JSON::ParserError => e
     render json: { message: I18n.t('errors/messages.ai_response_invalid') }, status: :internal_server_error
   end

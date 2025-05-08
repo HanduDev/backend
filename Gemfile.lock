@@ -294,6 +294,10 @@ GEM
       i18n
     rdoc (6.12.0)
       psych (>= 4.0.0)
+    redis (5.4.0)
+      redis-client (>= 0.22.0)
+    redis-client (0.24.0)
+      connection_pool
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
@@ -387,6 +391,12 @@ GEM
     securerandom (0.4.1)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
+    sidekiq (8.0.3)
+      connection_pool (>= 2.5.0)
+      json (>= 2.9.0)
+      logger (>= 1.6.2)
+      rack (>= 3.1.0)
+      redis-client (>= 0.23.2)
     signet (0.19.0)
       addressable (~> 2.8)
       faraday (>= 0.17.5, < 3.a)
@@ -474,6 +484,7 @@ DEPENDENCIES
   rails (~> 8.0.1)
   rails-i18n
   ransack
+  redis
   rspec
   rspec-rails
   rswag-api
@@ -486,6 +497,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   ruby-gemini-ai
   shoulda-matchers
+  sidekiq
   solid_cable
   solid_cache
   solid_queue
