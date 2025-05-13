@@ -27,6 +27,7 @@ RSpec.describe '/api/v1/translate_text', type: :request, swagger_doc: 'api/swagg
             type: :object,
             properties: {
               text: { type: :string, example: 'Hello, world!' },
+              image: { type: :string, example: 'https://example.com/image.jpg' },
               from_language: { type: :string, example: 'en', enum: Language::POSSIBLE_LANGUAGES },
               to_language: { type: :string, example: 'pt', enum: Language::POSSIBLE_LANGUAGES }
             },

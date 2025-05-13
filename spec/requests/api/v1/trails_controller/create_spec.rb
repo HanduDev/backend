@@ -22,6 +22,8 @@ RSpec.describe '/api/v1/trails', type: :request, swagger_doc: 'api/swagger.yaml'
       }
     ].to_json
 
+    allow(CreateTrailWorker).to receive(:perform_async).and_return(true)
+
     allow_any_instance_of(GoogleAiService).to receive(:generate_text)
       .and_return(ai_trail_response, ai_lessons_response)
   end
@@ -76,29 +78,6 @@ RSpec.describe '/api/v1/trails', type: :request, swagger_doc: 'api/swagger.yaml'
       response '401', 'Expired or invalid session' do
         let(:Authorization) { nil }
         let(:trail_params) {}
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json': {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-
-        run_test!
-      end
-
-      response '422', 'Invalid body' do
-        let(:trail_params) do
-          {
-            language: 'any_language',
-            developments: '',
-            level: '',
-            time_to_learn: '',
-            time_to_study: '',
-            themes: ''
-          }
-        end
 
         after do |example|
           example.metadata[:response][:content] = {

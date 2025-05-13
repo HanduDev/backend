@@ -7,6 +7,7 @@ RSpec.describe '/api/v1/users/resend_email_confirmation', type: :request, swagge
   let(:confirmed_email_at) { nil }
 
   before do
+    allow_any_instance_of(User).to receive(:send_email_confirmation).and_return(true)
     allow_any_instance_of(GoogleAiService).to receive(:generate_text).and_return('Olá, mundo!')
   end
 

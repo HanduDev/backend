@@ -3,6 +3,10 @@
 require 'swagger_helper'
 
 RSpec.describe '/api/v1/authentication/register', type: :request, swagger_doc: 'api/swagger.yaml' do
+  before do
+    allow_any_instance_of(User).to receive(:send_email_confirmation).and_return(true)
+  end
+
   path '/api/v1/authentication/register' do
     post 'Register an user' do
       tags 'Authentication'
