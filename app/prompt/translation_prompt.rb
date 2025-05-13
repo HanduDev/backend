@@ -19,7 +19,11 @@ class TranslationPrompt
 
   def prompt
     "Traduza de #{from_language.name} para #{to_language.name}.
-Por favor, forneça-nos apenas o texto traduzido, e nada mais."
+
+Se você receber uma imagem, traduza todo o texto da imagem para a linguagem de destino.
+Lembre-se: Traduza sempre o texto, de #{from_language.name} para #{to_language.name}.
+
+Por favor, forneça-nos apenas o texto traduzido para #{to_language.name}, e nada mais."
   end
 
   private

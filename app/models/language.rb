@@ -22,6 +22,7 @@ class Language
     en
     en-us
     es
+    ja
     et
     fa
     fi

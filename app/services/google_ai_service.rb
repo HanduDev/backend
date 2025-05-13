@@ -7,7 +7,9 @@ class GoogleAiService
     @user = user
   end
 
-  def generate_text(prompt:, system_prompt: '')
+  def generate_text(prompt: nil, image: nil, system_prompt: '')
+    raise(CustomException, 'Prompt or image is required') if image.nil? && prompt.nil?
+
     contents = "#{system_prompt}\n#{prompt}"
 
     params = {}
@@ -16,15 +18,24 @@ class GoogleAiService
     uri = URI(@url)
     uri.query = URI.encode_www_form(params) if params.present?
 
+    parts = []
+
+    parts << { text: contents }
+
+    parts << {
+      inlineData: {
+        data: Base64.strict_encode64(image.read),
+        mimeType: image.content_type
+      }
+    } if image.present?
+
+    puts "Parts: #{parts}"
+
     response = Faraday.post(uri.to_s) do |req|
       req.body = {
         contents: [
           {
-            parts: [
-              {
-                text: contents
-              }
-            ]
+            parts: parts
           }
         ]
       }.to_json
@@ -32,13 +43,9 @@ class GoogleAiService
       req.headers['Content-Type'] = 'application/json'
     end
 
-    puts "Response Status: #{response.status}"
-    puts "Response Headers: #{response.headers}"
-
     raise(CustomException, response.body) unless response.success?
 
     json_response = JSON.parse(response.body, symbolize_names: true)
-    puts "Response Body: #{json_response[:candidates].first[:content][:parts].first[:text]}"
     message = json_response[:candidates].first[:content][:parts].first[:text]
 
     raise(CustomException, 'No response from Google AI') if message.blank?
@@ -53,7 +60,7 @@ class GoogleAiService
     }
 
     @user.ai_responses.create!(
-      user_prompt: prompt,
+      user_prompt: prompt || 'imagem',
       system_prompt: system_prompt,
       output: formatted_response[:message],
       total_tokens: formatted_response[:metadata][:candidate_tokens],

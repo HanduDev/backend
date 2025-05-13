@@ -49,9 +49,12 @@ class Trail < ApplicationRecord
   def progress
     return 0 if lessons.empty?
 
-    finished_lessons = lessons.select(&:has_finished?)
     total_lessons = lessons.count
 
     (finished_lessons.count.to_f / total_lessons * 100).round(2)
+  end
+
+  def finished_lessons
+    lessons.where(has_finished: true)
   end
 end
