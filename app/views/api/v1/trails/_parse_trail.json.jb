@@ -10,5 +10,6 @@ language = Language.new(acronym: trail.language)
     name: language.name,
     code: language.acronym
   },
-  progress: trail.progress / 100.0
+  progress: trail.progress / 100.0,
+  activity_type: trail.activity_type
 }
