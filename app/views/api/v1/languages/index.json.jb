@@ -4,5 +4,5 @@
       acronym: language.acronym,
       name: language.name
     }
-  end
+  end.sort_by { |language| language[:name] }
 }

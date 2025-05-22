@@ -26,15 +26,19 @@
 #  trail_id  (trail_id => trails.id)
 #
 class Lesson < ApplicationRecord
+  PRACTICAL_ACTIVITY_TYPES = %w[multiple_choice translation].freeze
+  POSSIBLE_ACTIVITY_TYPES = %w[theorical].concat(PRACTICAL_ACTIVITY_TYPES).freeze
+
   belongs_to :trail
 
   validates :name, presence: true
   validates :has_finished, inclusion: { in: [true, false] }
   validates :finished_at, presence: true, if: :has_finished?
-
   has_many :options, dependent: :destroy
 
   before_validation :set_finished_at, if: :has_finished?
+
+  enum :activity_type, POSSIBLE_ACTIVITY_TYPES.index_by(&:itself)
 
   def check_answer(answer)
     self.user_answer = answer
@@ -45,7 +49,10 @@ class Lesson < ApplicationRecord
     else
       answer.parameterize == expected_answer&.parameterize
     end
+  end
 
+  def is_practical?
+    PRACTICAL_ACTIVITY_TYPES.include?(activity_type)
   end
 
   private

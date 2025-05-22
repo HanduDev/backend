@@ -6,7 +6,7 @@ class Api::V1::TrailsController < ApplicationController
   before_action :set_trail, only: %i[show destroy]
 
   def index
-    @trails = @current_user.trails.includes(:lessons)
+    @trails = @current_user.trails.includes(:lessons).order(created_at: :desc)
   end
 
   def create

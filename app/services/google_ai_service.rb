@@ -29,8 +29,6 @@ class GoogleAiService
       }
     } if image.present?
 
-    puts "Parts: #{parts}"
-
     response = Faraday.post(uri.to_s) do |req|
       req.body = {
         contents: [
