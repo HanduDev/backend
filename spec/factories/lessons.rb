@@ -6,9 +6,11 @@
 #
 #  id               :integer          not null, primary key
 #  activity_type    :string
+#  attempt_count    :integer          default(0)
 #  expected_answer  :string
 #  finished_at      :datetime
 #  has_finished     :boolean          default(FALSE), not null
+#  is_correct       :boolean          default(FALSE)
 #  markdown_content :text             default("")
 #  name             :string           not null
 #  question         :string

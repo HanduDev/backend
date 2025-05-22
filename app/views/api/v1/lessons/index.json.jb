@@ -6,7 +6,8 @@
       id: lesson.id,
       name: lesson.name,
       hasFinished: lesson.has_finished,
-      activityType: lesson.activity_type
+      activityType: lesson.activity_type,
+      isCorrect: lesson.is_correct
     }
   end
 }

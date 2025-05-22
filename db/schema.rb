@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_08_111756) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_22_163104) do
   create_table "ai_responses", force: :cascade do |t|
     t.text "user_prompt", null: false
     t.text "system_prompt"
@@ -35,6 +35,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_111756) do
     t.string "question"
     t.string "expected_answer"
     t.string "user_answer"
+    t.integer "attempt_count", default: 0
+    t.boolean "is_correct", default: false
     t.index ["trail_id"], name: "index_lessons_on_trail_id"
   end
 

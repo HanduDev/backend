@@ -6,9 +6,11 @@
 #
 #  id               :integer          not null, primary key
 #  activity_type    :string
+#  attempt_count    :integer          default(0)
 #  expected_answer  :string
 #  finished_at      :datetime
 #  has_finished     :boolean          default(FALSE), not null
+#  is_correct       :boolean          default(FALSE)
 #  markdown_content :text             default("")
 #  name             :string           not null
 #  question         :string
@@ -29,7 +31,10 @@ class Lesson < ApplicationRecord
   PRACTICAL_ACTIVITY_TYPES = %w[multiple_choice translation].freeze
   POSSIBLE_ACTIVITY_TYPES = %w[theorical].concat(PRACTICAL_ACTIVITY_TYPES).freeze
 
+  MAX_ATTEMPTS = 3
+
   belongs_to :trail
+  has_one :user, through: :trail
 
   validates :name, presence: true
   validates :has_finished, inclusion: { in: [true, false] }
@@ -45,10 +50,23 @@ class Lesson < ApplicationRecord
 
     if activity_type == 'multiple_choice'
       option = options.find(answer)
-      option.correct
+      is_correct = option.correct
+    elsif activity_type == 'translation'
+      prompt = Lesson::TranslationCorrectorPrompt.new(lesson: self).prompt
+      response = GoogleAiService.new(user: user).generate_text(prompt: prompt)
+      is_correct = response.strip.include?('true')
     else
-      answer.parameterize == expected_answer&.parameterize
+      is_correct = answer.parameterize == expected_answer&.parameterize
     end
+
+    self.attempt_count += 1
+    self.is_correct = is_correct
+
+    self.has_finished = is_correct || attempt_count == MAX_ATTEMPTS
+
+    self.save!
+
+    is_correct
   end
 
   def is_practical?

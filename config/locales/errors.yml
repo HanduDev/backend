@@ -5,6 +5,7 @@ pt-BR:
     error: "Erro ao processar a requisição."
     email_not_confirmed: "E-mail não confirmado."
     ai_response_invalid: "Resposta inválida do assistente."
+    max_attempts_reached: "Você atingiu o limite de tentativas."
 
 en:
   errors/messages:
@@ -12,4 +13,5 @@ en:
     invalid_session: "Expired or invalid session."
     error: "Error processing the request."
     email_not_confirmed: "Email not confirmed."
-    ai_response_invalid: "Resposta inválida do assistente."
+    ai_response_invalid: "Invalid AI response."
+    max_attempts_reached: "You have reached the maximum number of attempts."

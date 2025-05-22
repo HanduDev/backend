@@ -10,10 +10,13 @@ lesson_hash = {
   createdAt: lesson.created_at,
   activityType: lesson.activity_type,
   question: lesson.question,
-  userAnswer: lesson.user_answer
+  userAnswer: lesson.user_answer,
+  isCorrect: lesson.is_correct,
+  attemptCount: lesson.attempt_count
 }
 
 lesson_hash[:options] = lesson.options.select(:id, :content) if lesson.options.present?
+lesson_hash[:expectedAnswer] = lesson.expected_answer if lesson.expected_answer.present? && lesson.has_finished
 
 {
   lesson: lesson_hash

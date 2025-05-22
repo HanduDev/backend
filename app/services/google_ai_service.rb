@@ -67,4 +67,14 @@ class GoogleAiService
 
     formatted_response[:message]
   end
+
+  def generate_json(prompt: nil, image: nil, system_prompt: '')
+    raise(CustomException, 'Prompt or image is required') if image.nil? && prompt.nil?
+
+    text = generate_text(prompt: prompt, image: image, system_prompt: system_prompt)
+
+    JSON.parse(text.gsub('```json', '').gsub('```', '').strip)
+  rescue JSON::ParserError
+    raise(CustomException, 'Resposta inválida')
+  end
 end
