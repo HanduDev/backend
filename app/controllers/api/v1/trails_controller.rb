@@ -38,9 +38,4 @@ class Api::V1::TrailsController < ApplicationController
                                   :level, :time_to_learn, :time_to_study,
                                   developments: [], themes: [])
   end
-
-  def sanitize_json_string(str)
-    str.encode('UTF-8', invalid: :replace, undef: :replace)
-      .gsub(/[[:cntrl:]&&[^\n\r\t]]/, '') # remove caracteres de controle ASCII inválidos
-  end
 end

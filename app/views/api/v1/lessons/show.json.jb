@@ -15,7 +15,8 @@ lesson_hash = {
   attemptCount: lesson.attempt_count
 }
 
-lesson_hash[:options] = lesson.options.select(:id, :content) if lesson.options.present?
+options_to_select = lesson.has_finished ? %i[id content correct] : %i[id content]
+lesson_hash[:options] = lesson.options.select(options_to_select) if lesson.options.present?
 lesson_hash[:expectedAnswer] = lesson.expected_answer if lesson.expected_answer.present? && lesson.has_finished
 
 {
