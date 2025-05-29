@@ -18,21 +18,21 @@ paths:
               example:
                 id: 1
                 email: user1@email.com
-                fullName: Ana Beatriz de Lara
+                fullName: Sr. Henry Pedroso
                 photoUrl:
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDcxODYyMDd9.CroSMoV9Lf-owzN9tA5iZuQSqyX5efJeflPUXM_h_Pc
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDg2MTU4NDB9.tFXh_QNiEd77_ffeFcC7tlVAQOY4BC1lm2I-MOQF-8Y
         '201':
           description: Created and logged successfully
           content:
             application/json:
               example:
                 id: 1
-                email: noah.conn@padberg-walsh.example
-                fullName: Maria Júlia Mendes
-                photoUrl: http://hartmann-gleason.test/emerson_greenfelder
+                email: magdalena_mccullough@jenkins.example
+                fullName: Yuri Goulart
+                photoUrl: http://marks-nitzsche.test/miesha_dubuque
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDcxODYyMDd9.CroSMoV9Lf-owzN9tA5iZuQSqyX5efJeflPUXM_h_Pc
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDg2MTU4NDB9.tFXh_QNiEd77_ffeFcC7tlVAQOY4BC1lm2I-MOQF-8Y
         '401':
           description: Unauthorized
           content:
@@ -50,7 +50,7 @@ paths:
                   properties:
                     token:
                       type: string
-                      example: GI9y003FYzqv
+                      example: Et1a9v9ZETk3yu
                   required:
                   - token
               required:
@@ -75,10 +75,10 @@ paths:
               example:
                 id: 1
                 email: user2@email.com
-                fullName: Srta. Bárbara Siqueiro
+                fullName: Maria Laura Carvalheira Jr.
                 photoUrl:
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDcxODYyMDd9.CroSMoV9Lf-owzN9tA5iZuQSqyX5efJeflPUXM_h_Pc
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDg2MTU4NDB9.tFXh_QNiEd77_ffeFcC7tlVAQOY4BC1lm2I-MOQF-8Y
       requestBody:
         content:
           application/json:
@@ -90,10 +90,10 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: edgar@turcotte.test
+                      example: angelica.harber@schmitt.test
                     password:
                       type: string
-                      example: toXt3z2T28ZvsEIo
+                      example: 5awK8ESNke1Yr
               required:
               - email
               - password
@@ -128,11 +128,11 @@ paths:
             application/json:
               example:
                 id: 2
-                email: kathryne.schimmel@mayer-okon.example
-                fullName: Srta. Henrique Amoreira
+                email: andrea@cummerata.test
+                fullName: Bruno Cabreira
                 photoUrl:
                 isEmailConfirmed: false
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDcxODYyMDd9.CD2lwc3nzVLGnYPk2i9IaShhwW-C0lJ-3lWIa1EjbI4
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDg2MTU4NDB9.vI91LsWbeOzzmX2-K77jkYUsE9BASRX53FXqaphYkEM
       requestBody:
         content:
           application/json:
@@ -144,13 +144,13 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: spring@rogahn.example
+                      example: annabelle.fahey@schuster.example
                     password:
                       type: string
-                      example: 2C6xX2ecC
+                      example: qm9D1FY4QAAuAQtq
                     full_name:
                       type: string
-                      example: Lara Goulart
+                      example: Dalila Esteves Neto
               required:
               - email
               - password
@@ -176,8 +176,10 @@ paths:
                 languages:
                 - acronym: af
                   name: Africâner
-                - acronym: ar
-                  name: Árabe
+                - acronym: de
+                  name: Alemão
+                - acronym: hy
+                  name: Armênio
                 - acronym: az
                   name: Azerbaijano
                 - acronym: ba
@@ -188,66 +190,64 @@ paths:
                   name: Búlgaro
                 - acronym: ca
                   name: Canadense
-                - acronym: cs
-                  name: Tcheco
-                - acronym: cy
-                  name: Galês
+                - acronym: hr
+                  name: Croata
                 - acronym: da
                   name: Dinamarquês
-                - acronym: de
-                  name: Alemão
-                - acronym: el
-                  name: Grego
-                - acronym: en
-                  name: Inglês
-                - acronym: en-us
-                  name: Inglês
+                - acronym: sk
+                  name: Eslovaco
                 - acronym: es
                   name: Espanhol
-                - acronym: ja
-                  name: Japonês
                 - acronym: et
                   name: Estoniano
-                - acronym: fa
-                  name: Persa
-                - acronym: fi
-                  name: Finlandês
                 - acronym: fo
                   name: Feroês
+                - acronym: fi
+                  name: Finlandês
                 - acronym: fr
                   name: Francês
                 - acronym: gl
                   name: Galego
+                - acronym: cy
+                  name: Galês
+                - acronym: el
+                  name: Grego
                 - acronym: gu
                   name: Guzerate
                 - acronym: he
                   name: Hebraico
                 - acronym: hi
                   name: Híndi
-                - acronym: hr
-                  name: Croata
                 - acronym: hu
                   name: Húngaro
-                - acronym: hy
-                  name: Armênio
                 - acronym: id
                   name: Indonésio
+                - acronym: en
+                  name: Inglês
+                - acronym: en-us
+                  name: Inglês
                 - acronym: is
                   name: Islandês
                 - acronym: it
                   name: Italiano
+                - acronym: ja
+                  name: Japonês
                 - acronym: lt
                   name: Lituano
+                - acronym: fa
+                  name: Persa
                 - acronym: pt
                   name: Português
                 - acronym: pt-br
                   name: Português
-                - acronym: sk
-                  name: Eslovaco
                 - acronym: sv
                   name: Sueco
+                - acronym: cs
+                  name: Tcheco
                 - acronym: tr
                   name: Turco
+                - acronym: ar
+                  name: Árabe
         '401':
           description: Expired or invalid session
           content:
@@ -312,14 +312,16 @@ paths:
               example:
                 lesson:
                   id: 1
-                  name: Dolor laborum dolore expedita.
-                  content: Dolorum optio iusto. Reiciendis aut amet. Recusandae aperiam
-                    nesciunt.
+                  name: Eligendi qui exercitationem fugit.
+                  content: Inventore vitae tempora. Quis repellendus provident. At
+                    minus qui.
                   hasFinished: false
-                  createdAt: '2025-05-12T22:30:07.889-03:00'
+                  createdAt: '2025-05-29T11:37:20.871-03:00'
                   activityType:
                   question:
                   userAnswer:
+                  isCorrect: false
+                  attemptCount: 0
         '401':
           description: Expired or invalid session
           content:
@@ -352,17 +354,20 @@ paths:
               example:
                 lessons:
                 - id: 1
-                  name: Vel sed velit deleniti.
+                  name: Deserunt optio voluptatum id.
                   hasFinished: false
                   activityType:
+                  isCorrect: false
                 - id: 2
-                  name: Et facilis officia est.
+                  name: Itaque magni dolores quam.
                   hasFinished: false
                   activityType:
+                  isCorrect: false
                 - id: 3
-                  name: In nemo ex iusto.
+                  name: Provident odio est iste.
                   hasFinished: false
                   activityType:
+                  isCorrect: false
         '401':
           description: Expired or invalid session
           content:
@@ -502,23 +507,23 @@ paths:
             application/json:
               example:
                 trails:
-                - id: 1
-                  name: Ullam modi consequatur.
-                  description: Minus assumenda labore. Dignissimos qui dolorem.
+                - id: 3
+                  name: Earum voluptate aut.
+                  description: Aut rerum autem. Architecto fugiat sit.
                   language:
                     name: Inglês
                     code: en
                   progress: 0.0
                 - id: 2
-                  name: Soluta quidem explicabo.
-                  description: Iusto omnis sit. Quod ipsa id.
+                  name: Explicabo dolorem molestias.
+                  description: At ut rem. Consequuntur iste ut.
                   language:
                     name: Inglês
                     code: en
                   progress: 0.0
-                - id: 3
-                  name: Temporibus non cum.
-                  description: Et maxime officia. Cumque quidem porro.
+                - id: 1
+                  name: Laborum quis qui.
+                  description: Nam id eos. Et ut qui.
                   language:
                     name: Inglês
                     code: en
@@ -587,22 +592,28 @@ paths:
               example:
                 trail:
                   id: 1
-                  name: Quis in expedita.
-                  description: Iusto placeat in. Voluptas eius ab.
+                  name: Voluptas unde dicta.
+                  description: Omnis aut et. Non voluptatem nobis.
                   language:
                     name: Inglês
                     code: en
                   progress: 0.0
                   lessons:
                   - id: 1
-                    name: Eum quos dolores unde.
+                    name: Sunt repellendus minima eaque.
                     hasFinished: false
+                    activityType:
+                    isCorrect: false
                   - id: 2
-                    name: Sapiente consectetur delectus et.
+                    name: Voluptatem consequatur magni beatae.
                     hasFinished: false
+                    activityType:
+                    isCorrect: false
                   - id: 3
-                    name: Ab a enim modi.
+                    name: Repellendus suscipit placeat eum.
                     hasFinished: false
+                    activityType:
+                    isCorrect: false
         '401':
           description: Expired or invalid session
           content:
@@ -775,7 +786,7 @@ paths:
               example:
                 id: 1
                 email: user26@email.com
-                fullName: Sra. Ayla da Veiga
+                fullName: Melissa Pinto Jr.
                 photoUrl:
                 isEmailConfirmed: true
         '401':
@@ -832,7 +843,7 @@ paths:
               example:
                 id: 1
                 email: user29@email.com
-                fullName: André Pinto
+                fullName: Maria Isis Caldas
                 photoUrl:
                 isEmailConfirmed: false
         '401':
@@ -841,6 +852,42 @@ paths:
             application/json:
               example:
                 message: Sessão expirada ou inválida.
+    put:
+      summary: Updates user information
+      tags:
+      - v1 API
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User information updated successfully
+          content:
+            application/json:
+              example:
+                id: 1
+                email: new_email@example.com
+                fullName: Beatriz Domingues
+                photoUrl:
+                isEmailConfirmed: true
+        '401':
+          description: Expired or invalid session
+        '422':
+          description: Unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
   "/api/v1/users/resend_email_confirmation":
     post:
       summary: Resend email confirmation

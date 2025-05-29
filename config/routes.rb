@@ -15,7 +15,7 @@ Rails.application.routes.draw do
         namespace :users do
           resources :confirm_email, only: :create
           resources :resend_email_confirmation, only: :create
-          resource :me, only: :show, controller: 'me'
+          resource :me, only: [:show, :update	], controller: 'me'
         end
 
         resources :translate_text, only: :create

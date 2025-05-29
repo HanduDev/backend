@@ -10,14 +10,14 @@ class ApplicationController < ActionController::API
     header = header.split.last if header
 
     begin
-      @decoded = JwtService.decode(header)
+      decoded = JwtService.decode(header)
 
-      if @decoded.blank?
+      if decoded.blank?
         return render json: { message: I18n.t('errors/messages.invalid_session') },
                       status: :unauthorized
       end
 
-      @current_user = User.find(@decoded[:user_id])
+      @current_user = User.find(decoded[:user_id])
     rescue JWT::DecodeError => e
       render json: { message: e.message }, status: :unauthorized
     end
@@ -32,6 +32,10 @@ class ApplicationController < ActionController::API
 
   def set_paper_trail_whodunnit
     PaperTrail.request.whodunnit = @current_user.id
+  end
+
+  def current_user
+    @current_user
   end
 
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
