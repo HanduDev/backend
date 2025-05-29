@@ -6,6 +6,7 @@ class Api::V1::Users::MeController < ApplicationController
   def show; end
 
   def update
+
     if @current_user.update(user_params)
       render :show
     else
@@ -16,6 +17,6 @@ class Api::V1::Users::MeController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :photo)
   end
 end

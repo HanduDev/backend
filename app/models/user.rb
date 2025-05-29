@@ -24,6 +24,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_one_attached :photo
+
   validates :full_name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password_digest, presence: true, if: -> { google_id.blank? }
@@ -54,6 +56,15 @@ class User < ApplicationRecord
     self.confirm_email_code_sent_at = Time.current
     save!
     UserMailer.email_confirm(self).deliver_later
+  end
+
+
+  def picture_url
+    return photo_url if photo_url.present?
+
+    return Rails.application.routes.url_helpers.service_url(photo, only_path: true) if photo.attached?
+
+    nil
   end
 
   private
