@@ -7,7 +7,7 @@ RSpec.describe '/api/v1/users/me', type: :request, swagger_doc: 'api/swagger.yam
 
   path '/api/v1/users/me' do
     put 'Updates user information' do
-      tags 'v1 API'
+      tags 'Users'
       consumes 'application/json'
       produces 'application/json'
       security [Bearer: []]
@@ -39,8 +39,15 @@ RSpec.describe '/api/v1/users/me', type: :request, swagger_doc: 'api/swagger.yam
 
       response '401', 'Expired or invalid session' do
         let(:user_params) { { } }
-
         let(:Authorization) { nil }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json': {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
 
         run_test!
       end
