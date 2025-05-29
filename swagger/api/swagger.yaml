@@ -18,21 +18,21 @@ paths:
               example:
                 id: 1
                 email: user1@email.com
-                fullName: Sr. Henry Pedroso
+                fullName: Sra. Francisca Aroeira
                 photoUrl:
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDg2MTU4NDB9.tFXh_QNiEd77_ffeFcC7tlVAQOY4BC1lm2I-MOQF-8Y
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDg2MTYzNjd9.X3UZiDl1NCnGBKwxZqGJsZnWFIc2FZZdYgiZwRjr0ro
         '201':
           description: Created and logged successfully
           content:
             application/json:
               example:
                 id: 1
-                email: magdalena_mccullough@jenkins.example
-                fullName: Yuri Goulart
-                photoUrl: http://marks-nitzsche.test/miesha_dubuque
+                email: vonnie@krajcik.example
+                fullName: Henrique Filgueira
+                photoUrl: http://okon-dooley.example/maxima.stoltenberg
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDg2MTU4NDB9.tFXh_QNiEd77_ffeFcC7tlVAQOY4BC1lm2I-MOQF-8Y
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDg2MTYzNjd9.X3UZiDl1NCnGBKwxZqGJsZnWFIc2FZZdYgiZwRjr0ro
         '401':
           description: Unauthorized
           content:
@@ -50,7 +50,7 @@ paths:
                   properties:
                     token:
                       type: string
-                      example: Et1a9v9ZETk3yu
+                      example: 8Z4fBObmtWuZCd
                   required:
                   - token
               required:
@@ -75,10 +75,10 @@ paths:
               example:
                 id: 1
                 email: user2@email.com
-                fullName: Maria Laura Carvalheira Jr.
+                fullName: Vinicius Gabeira Neto
                 photoUrl:
                 isEmailConfirmed: true
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDg2MTU4NDB9.tFXh_QNiEd77_ffeFcC7tlVAQOY4BC1lm2I-MOQF-8Y
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NDg2MTYzNjd9.X3UZiDl1NCnGBKwxZqGJsZnWFIc2FZZdYgiZwRjr0ro
       requestBody:
         content:
           application/json:
@@ -90,10 +90,10 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: angelica.harber@schmitt.test
+                      example: tilda@beier.example
                     password:
                       type: string
-                      example: 5awK8ESNke1Yr
+                      example: Ql4cNU3I
               required:
               - email
               - password
@@ -128,11 +128,11 @@ paths:
             application/json:
               example:
                 id: 2
-                email: andrea@cummerata.test
-                fullName: Bruno Cabreira
+                email: rudolph@roberts-deckow.test
+                fullName: Allana Henriques Neto
                 photoUrl:
                 isEmailConfirmed: false
-                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDg2MTU4NDB9.vI91LsWbeOzzmX2-K77jkYUsE9BASRX53FXqaphYkEM
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3NDg2MTYzNjd9.CXod8HAGqFcHkMkoiCaTGrkT8G0gBBEks3niOIc9KsM
       requestBody:
         content:
           application/json:
@@ -144,13 +144,13 @@ paths:
                   properties:
                     email:
                       type: string
-                      example: annabelle.fahey@schuster.example
+                      example: precious_mitchell@zulauf.example
                     password:
                       type: string
-                      example: qm9D1FY4QAAuAQtq
+                      example: jW5r15Dzb
                     full_name:
                       type: string
-                      example: Dalila Esteves Neto
+                      example: Ana Vieira
               required:
               - email
               - password
@@ -312,11 +312,11 @@ paths:
               example:
                 lesson:
                   id: 1
-                  name: Eligendi qui exercitationem fugit.
-                  content: Inventore vitae tempora. Quis repellendus provident. At
-                    minus qui.
+                  name: Nihil molestiae porro illo.
+                  content: Et ipsam repellendus. Quae delectus esse. Voluptatem id
+                    explicabo.
                   hasFinished: false
-                  createdAt: '2025-05-29T11:37:20.871-03:00'
+                  createdAt: '2025-05-29T11:46:07.807-03:00'
                   activityType:
                   question:
                   userAnswer:
@@ -354,17 +354,17 @@ paths:
               example:
                 lessons:
                 - id: 1
-                  name: Deserunt optio voluptatum id.
+                  name: Autem voluptatum quia reprehenderit.
                   hasFinished: false
                   activityType:
                   isCorrect: false
                 - id: 2
-                  name: Itaque magni dolores quam.
+                  name: Quod aut hic ex.
                   hasFinished: false
                   activityType:
                   isCorrect: false
                 - id: 3
-                  name: Provident odio est iste.
+                  name: Qui consequatur fuga quidem.
                   hasFinished: false
                   activityType:
                   isCorrect: false
@@ -508,22 +508,22 @@ paths:
               example:
                 trails:
                 - id: 3
-                  name: Earum voluptate aut.
-                  description: Aut rerum autem. Architecto fugiat sit.
+                  name: Modi quis voluptatem.
+                  description: Nam et libero. Numquam repudiandae sed.
                   language:
                     name: Inglês
                     code: en
                   progress: 0.0
                 - id: 2
-                  name: Explicabo dolorem molestias.
-                  description: At ut rem. Consequuntur iste ut.
+                  name: Praesentium optio fugiat.
+                  description: Assumenda est corrupti. Quia porro tenetur.
                   language:
                     name: Inglês
                     code: en
                   progress: 0.0
                 - id: 1
-                  name: Laborum quis qui.
-                  description: Nam id eos. Et ut qui.
+                  name: Quia voluptas quo.
+                  description: Consequatur excepturi culpa. Quia deserunt consequatur.
                   language:
                     name: Inglês
                     code: en
@@ -592,25 +592,25 @@ paths:
               example:
                 trail:
                   id: 1
-                  name: Voluptas unde dicta.
-                  description: Omnis aut et. Non voluptatem nobis.
+                  name: Qui hic repellendus.
+                  description: Corrupti sed rerum. Corrupti asperiores quaerat.
                   language:
                     name: Inglês
                     code: en
                   progress: 0.0
                   lessons:
                   - id: 1
-                    name: Sunt repellendus minima eaque.
+                    name: Ullam minus quo repellat.
                     hasFinished: false
                     activityType:
                     isCorrect: false
                   - id: 2
-                    name: Voluptatem consequatur magni beatae.
+                    name: Sit quae rerum ut.
                     hasFinished: false
                     activityType:
                     isCorrect: false
                   - id: 3
-                    name: Repellendus suscipit placeat eum.
+                    name: Assumenda et quos deleniti.
                     hasFinished: false
                     activityType:
                     isCorrect: false
@@ -786,7 +786,7 @@ paths:
               example:
                 id: 1
                 email: user26@email.com
-                fullName: Melissa Pinto Jr.
+                fullName: Carolina Pimenta Jr.
                 photoUrl:
                 isEmailConfirmed: true
         '401':
@@ -843,7 +843,7 @@ paths:
               example:
                 id: 1
                 email: user29@email.com
-                fullName: Maria Isis Caldas
+                fullName: Pablo Junqueira
                 photoUrl:
                 isEmailConfirmed: false
         '401':
@@ -855,7 +855,7 @@ paths:
     put:
       summary: Updates user information
       tags:
-      - v1 API
+      - Users
       security:
       - Bearer: []
       parameters:
@@ -871,11 +871,15 @@ paths:
               example:
                 id: 1
                 email: new_email@example.com
-                fullName: Beatriz Domingues
+                fullName: Célia da Gama
                 photoUrl:
                 isEmailConfirmed: true
         '401':
           description: Expired or invalid session
+          content:
+            application/json:
+              example:
+                message: Sessão expirada ou inválida.
         '422':
           description: Unprocessable entity
       requestBody:
