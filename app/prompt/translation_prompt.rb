@@ -19,11 +19,12 @@ class TranslationPrompt
 
   def prompt
     if from_language.acronym == 'libras'
-      return "Você recebeu uma foto em que o usuário está fazendo gestos em LIBRAS.
+      return "Você recebeu uma foto em que o usuário está fazendo uma letra em LIBRAS.
 
 Você deve identificar os gestos do usuário e traduzí-los para PT-BR.
+Identifique como sendo somente a letra que o usuário está fazendo.
 
-Por favor, forneça-nos apenas o texto traduzido para PT-BR, e nada mais."
+Por favor, forneça-nos apenas A LETRA traduzida para PT-BR, e nada mais."
     end
 
     "Traduza de #{from_language.name} para #{to_language.name}.
