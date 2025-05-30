@@ -51,11 +51,12 @@ class User < ApplicationRecord
       confirm_email_code == code
   end
 
-  def send_email_confirmation
+  def send_email_confirmation(email: nil)
     self.confirm_email_code = SecureRandom.alphanumeric(4).upcase
     self.confirm_email_code_sent_at = Time.current
     save!
-    UserMailer.email_confirm(self).deliver_later
+
+    UserMailer.email_confirm(self, email: email).deliver_later
   end
 
 
