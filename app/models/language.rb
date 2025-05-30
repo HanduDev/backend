@@ -43,7 +43,8 @@ class Language
     pt-br
     sk
     sv
-    tr].freeze
+    tr
+    libras].freeze
 
   attribute :acronym, :string
   attribute :name, :string
@@ -61,7 +62,7 @@ class Language
   end
 
   def self.all
-    POSSIBLE_LANGUAGES.map { |acronym| Language.new(acronym: acronym) }
+    POSSIBLE_LANGUAGES.select { |acronym| acronym != 'libras' }.map { |acronym| Language.new(acronym: acronym) }
   end
 
   private

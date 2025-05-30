@@ -7,7 +7,7 @@ class GoogleAiService
     @user = user
   end
 
-  def generate_text(prompt: nil, image: nil, system_prompt: '')
+  def generate_text(prompt: nil, image: nil, video: nil, system_prompt: '')
     raise(CustomException, 'Prompt or image is required') if image.nil? && prompt.nil?
 
     contents = "#{system_prompt}\n#{prompt}"
