@@ -1,4 +1,6 @@
 class Trail::TrailService
+  TIMES_TO_ATTEMPT = 3
+
   def call
     raise NotImplementedError, 'Subclasses must implement the call method'
   end
@@ -10,10 +12,17 @@ class Trail::TrailService
   end
 
   def generate_json_response(prompt:)
-    ai_response = ai_service.generate_text(prompt: prompt)
+    attempt = 0
 
-    ai_response = ai_response.gsub('```json', '').gsub('```', '').strip
+    TIMES_TO_ATTEMPT.times do
+      begin
+        return ai_service.generate_json(prompt: prompt)
+      rescue => e
+        attempt += 1
+        sleep(TIMES_TO_ATTEMPT)
 
-    JSON.parse(ai_response)
+        raise e if attempt == TIMES_TO_ATTEMPT
+      end
+    end
   end
 end

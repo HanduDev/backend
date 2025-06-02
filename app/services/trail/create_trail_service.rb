@@ -7,18 +7,20 @@ class Trail::CreateTrailService < Trail::TrailService
   end
 
   def call
-    ActiveRecord::Base.transaction do
-      initialize_trail
+    initialize_trail
 
-      trail_response = generate_json_response(prompt: trail_prompt.prompt)
+    trail_response = generate_json_response(prompt: trail_prompt.prompt)
 
-      @trail.assign_attributes(trail_response)
-      @trail.save!
+    @trail.assign_attributes(trail_response)
+    @trail.save!
 
-      ::Trail::CreateLessonsService.new(trail: @trail, user: @user).call
+    ::Trail::CreateLessonsService.new(trail: @trail, user: @user).call
 
-      @trail
-    end
+    @trail
+  rescue => e
+    Rails.logger.error("Failed to create trail for user #{@user.id} - Error: #{e.message}")
+    @trail.destroy! if @trail.persisted?
+    raise e
   end
 
   private
