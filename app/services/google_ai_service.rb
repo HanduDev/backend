@@ -59,9 +59,6 @@ class GoogleAiService
       end
     end
 
-
-    end
-
     raise(CustomException, response.body) unless response.success?
 
     json_response = JSON.parse(response.body, symbolize_names: true)
