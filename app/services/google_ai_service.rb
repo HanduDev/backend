@@ -55,7 +55,7 @@ class GoogleAiService
         attempt += 1
         sleep(TIMES_TO_ATTEMPT)
 
-        raise(CustomException, response.body) if attempt == TIMES_TO_ATTEMPT
+        raise e if attempt == TIMES_TO_ATTEMPT
       end
     end
 
