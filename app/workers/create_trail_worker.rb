@@ -27,7 +27,7 @@ class CreateTrailWorker
 
     ActionCable.server.broadcast("user_channel_trail_#{user_id}", { trail: trail_response })
   rescue => e
-    ActionCable.server.broadcast("user_channel_trail_#{user.id}", { error: e.message })
+    ActionCable.server.broadcast("user_channel_trail_#{user_id}", { error: e.message })
     Rails.logger.error(e.message)
   end
 end

@@ -19,6 +19,7 @@ class Trail::CreateLessonsService < Trail::TrailService
   def call
     @lessons = []
     summary = ''
+    total_lessons = 0
 
     TOTAL_LESSONS.times do
       selected_class, selected_prompt = select_lesson_prompt_by_priority
@@ -26,6 +27,8 @@ class Trail::CreateLessonsService < Trail::TrailService
       is_practical = ::Lesson::PRACTICAL_ACTIVITY_TYPES.include?(selected_prompt.to_s)
       index = is_practical ? total_practical : total_theorical
       index += 1
+
+      total_lessons += 1
 
       prompt = selected_class.new(
         trail: @trail,
@@ -42,6 +45,9 @@ class Trail::CreateLessonsService < Trail::TrailService
 
       @lessons << lesson
     end
+  rescue => e
+    Rails.logger.error("Failed to create lessons for trail #{@trail.id} - Lesson: #{total_lessons}: #{e.message}")
+    raise e
   end
 
   private
