@@ -7,6 +7,8 @@ class GoogleAiService
     @user = user
   end
 
+  TIMES_TO_ATTEMPT = 3
+
   def generate_text(prompt: nil, image: nil, video: nil, system_prompt: '')
     raise(CustomException, 'Prompt or image is required') if image.nil? && prompt.nil?
 
@@ -29,16 +31,32 @@ class GoogleAiService
       }
     } if image.present?
 
-    response = Faraday.post(uri.to_s) do |req|
-      req.body = {
-        contents: [
-          {
-            parts: parts
-          }
-        ]
-      }.to_json
+    response = nil
 
-      req.headers['Content-Type'] = 'application/json'
+    attempt = 0
+
+    TIMES_TO_ATTEMPT.times do
+      begin
+        response = Faraday.post(uri.to_s) do |req|
+
+        req.body = {
+          contents: [
+            {
+              parts: parts
+            }
+          ]
+        }.to_json
+
+        req.headers['Content-Type'] = 'application/json'
+      rescue => e
+        attempt += 1
+        sleep(TIMES_TO_ATTEMPT)
+
+        raise(CustomException, response.body) if attempt == TIMES_TO_ATTEMPT
+      end
+    end
+
+
     end
 
     raise(CustomException, response.body) unless response.success?
