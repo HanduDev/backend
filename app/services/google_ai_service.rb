@@ -38,16 +38,16 @@ class GoogleAiService
     TIMES_TO_ATTEMPT.times do
       begin
         response = Faraday.post(uri.to_s) do |req|
+          req.body = {
+            contents: [
+              {
+                parts: parts
+              }
+            ]
+          }.to_json
 
-        req.body = {
-          contents: [
-            {
-              parts: parts
-            }
-          ]
-        }.to_json
-
-        req.headers['Content-Type'] = 'application/json'
+          req.headers['Content-Type'] = 'application/json'
+        end
 
         raise(CustomException, response.body) unless response.success?
         break
