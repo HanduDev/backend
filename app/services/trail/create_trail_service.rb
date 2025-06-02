@@ -7,16 +7,18 @@ class Trail::CreateTrailService < Trail::TrailService
   end
 
   def call
-    initialize_trail
+    ActiveRecord::Base.transaction do
+      initialize_trail
 
-    trail_response = generate_json_response(prompt: trail_prompt.prompt)
+      trail_response = generate_json_response(prompt: trail_prompt.prompt)
 
-    @trail.assign_attributes(trail_response)
-    @trail.save!
+      @trail.assign_attributes(trail_response)
+      @trail.save!
 
-    ::Trail::CreateLessonsService.new(trail: @trail, user: @user).call
+      ::Trail::CreateLessonsService.new(trail: @trail, user: @user).call
 
-    @trail
+      @trail
+    end
   end
 
   private
