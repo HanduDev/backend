@@ -48,6 +48,9 @@ class GoogleAiService
         }.to_json
 
         req.headers['Content-Type'] = 'application/json'
+
+        raise(CustomException, response.body) unless response.success?
+        break
       rescue => e
         attempt += 1
         sleep(TIMES_TO_ATTEMPT)
